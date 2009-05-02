@@ -1,0 +1,33 @@
+class Account
+    <Account>
+        <User></User>
+        <Pass></Pass>
+    </Account>
+
+class TicketInfo
+    <TicketInfo href="">
+        <CaseID></CaseID>
+        <Category></Category>
+        <Hostopian></Hostopian>
+        <Name></Name>
+        <Domain></Domain>
+        <Status></Status>
+        <Priority></Priority>
+        <Opened></Opened>
+    </TicketInfo>
+
+method GetTicketInfo
+params:
+    int id
+return TicketInfo
+
+method GetGroupTickets
+params
+    int groupID
+return TicketInfo[]
+
+method GetUserTickets
+params
+    string username
+return TicketInfo[]
+
