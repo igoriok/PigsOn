@@ -17,6 +17,8 @@ TicketWidget::TicketWidget(int id, QWidget *parent) :
     m_ui->comboBox_Status->addItem("In Progress", QString("in_progress"));
     m_ui->comboBox_Status->addItem("Closed", QString("closed"));
     m_ui->comboBox_Status->setCurrentIndex(-1);
+    m_ui->comboBox_Priority->addItems(QStringList(QString("1"))<<QString("2")<<QString("3")<<QString("4")<<QString("5"));
+    m_ui->comboBox_Priority->setCurrentIndex(-1);
 }
 
 void TicketWidget::updateContent(const Ticket & ticket)
@@ -116,7 +118,9 @@ void TicketWidget::changeEvent(QEvent *e)
     switch(e->type()) {
     case QEvent::LanguageChange:
         m_ui->retranslateUi(this);
-        if (ticket.CaseID > 0) m_ui->label_CaseID->setText(QString("<a style=\"text-decoration: underline; color:#0000ff;\" href=\"https://support.24hourwebhostingsupport.com/showcases.php?showme=%1\">%2</a>").arg(ticket.CaseID).arg(tr("CaseID")));
+        if (ticket.CaseID > 0) {
+            m_ui->label_CaseID->setText(QString("<a style=\"text-decoration: underline; color:#0000ff;\" href=\"https://support.24hourwebhostingsupport.com/showcases.php?showme=%1\">%2</a>").arg(ticket.CaseID).arg(tr("CaseID")));
+        }
         break;
     default:
         break;

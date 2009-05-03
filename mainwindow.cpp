@@ -236,9 +236,13 @@ void MainWindow::on_pigser_groupTicketsReady(int id, const QList<TicketInfo> & t
             }
         }
 
-        ui.treeWidget->resizeColumnToContents(0);
         root->setDisabled(false);
-        root->setHidden(false);
+        if (root->isHidden()) {
+            root->setHidden(false);
+            if (root->childCount() > 0)
+                root->setExpanded(true);
+        }
+        ui.treeWidget->resizeColumnToContents(0);
 
         if (newTickets && this->isHidden() && settings->showTrayMessages())
         {
