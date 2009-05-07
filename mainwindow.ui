@@ -132,18 +132,18 @@
     </property>
     <widget class="QMenu" name="menuToolBar">
      <property name="title">
-      <string>ToolBar</string>
+      <string>&amp;ToolBar</string>
      </property>
     </widget>
     <addaction name="menuToolBar"/>
    </widget>
    <widget class="QMenu" name="menuAction">
     <property name="title">
-     <string>Actions</string>
+     <string>&amp;Actions</string>
     </property>
-    <widget class="QMenu" name="menuLanguage_2">
+    <widget class="QMenu" name="menuLanguage">
      <property name="title">
-      <string>Language</string>
+      <string>&amp;Language</string>
      </property>
      <addaction name="actionEnglish"/>
      <addaction name="actionRussian"/>
@@ -151,7 +151,7 @@
     <addaction name="actionOpenTicket"/>
     <addaction name="actionSearchTickets"/>
     <addaction name="separator"/>
-    <addaction name="menuLanguage_2"/>
+    <addaction name="menuLanguage"/>
     <addaction name="actionSettings"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -166,7 +166,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="windowTitle">
-    <string>Actions</string>
+    <string>&amp;Actions</string>
    </property>
    <property name="iconSize">
     <size>
@@ -266,7 +266,7 @@
   </widget>
   <widget class="QDockWidget" name="dockWidget_Search">
    <property name="windowTitle">
-    <string>Search</string>
+    <string>Search results</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>8</number>
@@ -358,7 +358,7 @@
   </widget>
   <widget class="QDockWidget" name="dockWidget_DomainInfo">
    <property name="windowTitle">
-    <string>DomainInfo</string>
+    <string>Domain information</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>8</number>
@@ -407,7 +407,7 @@
      <normaloff>:/res/cancel.png</normaloff>:/res/cancel.png</iconset>
    </property>
    <property name="text">
-    <string>Close</string>
+    <string>&amp;Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
@@ -434,7 +434,7 @@
      <normaloff>:/res/info.png</normaloff>:/res/info.png</iconset>
    </property>
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -464,7 +464,7 @@
      <normaloff>:/res/questionmark.png</normaloff>:/res/questionmark.png</iconset>
    </property>
    <property name="text">
-    <string>AboutQt</string>
+    <string>About&amp;Qt</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutQtRole</enum>
@@ -476,7 +476,7 @@
      <normaloff>:/res/redo.png</normaloff>:/res/redo.png</iconset>
    </property>
    <property name="text">
-    <string>Reload All Groups</string>
+    <string>Reload All &amp;Groups</string>
    </property>
   </action>
   <action name="actionSettings">
@@ -485,7 +485,7 @@
      <normaloff>:/res/tools.png</normaloff>:/res/tools.png</iconset>
    </property>
    <property name="text">
-    <string>Settings</string>
+    <string>S&amp;ettings</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -502,7 +502,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>English</string>
+    <string>&amp;English</string>
    </property>
   </action>
   <action name="actionRussian">
@@ -510,12 +510,12 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Russian</string>
+    <string>&amp;Russian</string>
    </property>
   </action>
   <action name="actionOpenTicket">
    <property name="text">
-    <string>Open</string>
+    <string>&amp;Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>

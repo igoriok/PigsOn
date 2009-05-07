@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     // Try to load config
     settings->loadConfig();
 
+    // Restore Language
+    if (settings->getOption("iLang").toString() == QString("RU"))
+        ui.actionRussian->setChecked(true);
+
     // Restote Main Window state
     this->restoreState(settings->getOption("mwState").toByteArray());
 
@@ -79,10 +83,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
         root->setData(0, Qt::UserRole + 1, QVariant(gr.at(i).toInt()));
         root->setHidden(true);
     }
-
-    // Restore Language
-    if (settings->getOption("iLang").toString() == QString("RU"))
-        ui.actionRussian->setChecked(true);
 }
 
 TicketWidget * MainWindow::createTicketWidget(int id)

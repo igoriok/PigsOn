@@ -122,84 +122,80 @@
         <translation type="unfinished">&amp;Вид</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="142"/>
-        <location filename="mainwindow.ui" line="169"/>
-        <source>Actions</source>
-        <translation type="unfinished">Действия</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="192"/>
         <source>Cases</source>
-        <translation type="unfinished">Тикеты</translation>
+        <translation>Тикеты</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="224"/>
         <location filename="mainwindow.ui" line="316"/>
         <source>CaseID</source>
-        <translation type="unfinished">Тикет</translation>
+        <translation>Тикет</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="229"/>
         <location filename="mainwindow.ui" line="321"/>
         <source>Category</source>
-        <translation type="unfinished">Категория</translation>
+        <translation>Категория</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="234"/>
         <location filename="mainwindow.ui" line="326"/>
         <source>Hostopian</source>
-        <translation type="unfinished">Партнёр</translation>
+        <translation>Партнёр</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="239"/>
         <location filename="mainwindow.ui" line="331"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="244"/>
         <location filename="mainwindow.ui" line="336"/>
         <source>Domain</source>
-        <translation type="unfinished">Домен</translation>
+        <translation>Домен</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="249"/>
         <location filename="mainwindow.ui" line="341"/>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="254"/>
         <location filename="mainwindow.ui" line="346"/>
         <source>Priority</source>
-        <translation type="unfinished">Приоритет</translation>
+        <translation>Приоритет</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="259"/>
         <location filename="mainwindow.ui" line="351"/>
         <source>Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыт</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="269"/>
-        <source>Search</source>
-        <translation type="unfinished">Поиск</translation>
+        <source>Search results</source>
+        <oldsource>Search</oldsource>
+        <translation type="unfinished">Результат поиска</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="361"/>
-        <source>DomainInfo</source>
-        <oldsource>Domain Info</oldsource>
-        <translation type="unfinished"></translation>
+        <source>Domain information</source>
+        <oldsource>DomainInfo</oldsource>
+        <translation type="unfinished">Информация о домене</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="395"/>
         <source>&amp;Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Поиск</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="518"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Open</source>
+        <oldsource>Open</oldsource>
+        <translation type="unfinished">&amp;Открыть</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="521"/>
@@ -209,36 +205,40 @@
     <message>
         <location filename="mainwindow.ui" line="115"/>
         <source>&amp;Ticket</source>
-        <translation type="unfinished">Тикет</translation>
+        <translation type="unfinished">&amp;Тикет</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="124"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">Помощь</translation>
+        <translation type="unfinished">&amp;Помощь</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="135"/>
-        <source>ToolBar</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;ToolBar</source>
+        <oldsource>ToolBar</oldsource>
+        <translation type="unfinished">&amp;Тулбар</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="142"/>
+        <location filename="mainwindow.ui" line="169"/>
+        <source>&amp;Actions</source>
+        <translation type="unfinished">&amp;Действия</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="146"/>
-        <source>Language</source>
-        <translation>Язык</translation>
+        <source>&amp;Language</source>
+        <oldsource>Language</oldsource>
+        <translation type="unfinished">&amp;Язык</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="383"/>
         <source>&amp;New</source>
-        <translation>Создать</translation>
+        <translation type="unfinished">&amp;Создать</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="386"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">Найти</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="398"/>
@@ -247,8 +247,9 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="410"/>
-        <source>Close</source>
-        <translation>Закрыть</translation>
+        <source>&amp;Close</source>
+        <oldsource>Close</oldsource>
+        <translation type="unfinished">&amp;Закрыть</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="413"/>
@@ -258,7 +259,7 @@
     <message>
         <location filename="mainwindow.ui" line="425"/>
         <source>&amp;Reload</source>
-        <translation>Обновть</translation>
+        <translation type="unfinished">&amp;Обновть</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="428"/>
@@ -267,8 +268,9 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="437"/>
-        <source>About</source>
-        <translation>О программе</translation>
+        <source>&amp;About</source>
+        <oldsource>About</oldsource>
+        <translation type="unfinished">&amp;О программе</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="440"/>
@@ -278,7 +280,7 @@
     <message>
         <location filename="mainwindow.ui" line="452"/>
         <source>&amp;Quit</source>
-        <translation>Выйти</translation>
+        <translation type="unfinished">&amp;Выйти</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="455"/>
@@ -287,18 +289,21 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="467"/>
-        <source>AboutQt</source>
-        <translation>Об Qt</translation>
+        <source>About&amp;Qt</source>
+        <oldsource>AboutQt</oldsource>
+        <translation type="unfinished">О&amp;б Qt</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="479"/>
-        <source>Reload All Groups</source>
-        <translation>Обновить все группы</translation>
+        <source>Reload All &amp;Groups</source>
+        <oldsource>Reload All Groups</oldsource>
+        <translation type="unfinished">&amp;Обновить все группы</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="488"/>
-        <source>Settings</source>
-        <translation>Настройки</translation>
+        <source>S&amp;ettings</source>
+        <oldsource>Settings</oldsource>
+        <translation type="unfinished">&amp;Настройки</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="491"/>
@@ -307,13 +312,15 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="505"/>
-        <source>English</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;English</source>
+        <oldsource>English</oldsource>
+        <translation type="unfinished">&amp;Английский</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="513"/>
-        <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Russian</source>
+        <oldsource>Russian</oldsource>
+        <translation type="unfinished">&amp;Русский</translation>
     </message>
 </context>
 <context>
@@ -614,10 +621,6 @@
         <location filename="TicketWidget.ui" line="437"/>
         <source>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 222, 0, 255), stop:1 rgba(195, 220, 195, 255))</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous Audit</source>
-        <translation type="obsolete">История</translation>
     </message>
     <message>
         <location filename="TicketWidget.ui" line="440"/>
