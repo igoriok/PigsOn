@@ -79,6 +79,16 @@ void SettingsDialog::setTrayMess(bool b)
     m_ui->checkBox_TrayMess->setChecked(b);
 }
 
+bool SettingsDialog::getDebug() const
+{
+    return m_ui->checkBox_Debug->isChecked();
+}
+
+void SettingsDialog::setDebug(bool b)
+{
+    m_ui->checkBox_Debug->setChecked(b);
+}
+
 SettingsDialog::~SettingsDialog()
 {
     delete m_ui;

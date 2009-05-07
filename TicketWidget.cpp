@@ -28,7 +28,7 @@ void TicketWidget::updateContent(const Ticket & ticket)
 
     if (ticket.CaseID > 0) m_ui->label_CaseID->setText(QString("<a style=\"text-decoration: underline; color:#0000ff;\" href=\"https://support.24hourwebhostingsupport.com/showcases.php?showme=%1\">%2</a>").arg(ticket.CaseID).arg(tr("CaseID")));
     else m_ui->label_CaseID->setText(tr("CaseID"));
-    m_ui->lineEdit_CaseID->setText(QString("%1").arg(ticket.CaseID));
+    m_ui->lineEdit_CaseID->setText(QString::number(ticket.CaseID));
     m_ui->lineEdit_DateOpened->setText(ticket.DateOpened);
     m_ui->lineEdit_DateClosed->setText(ticket.DateClosed);
     m_ui->comboBox_Hostopian->clear();
@@ -91,13 +91,13 @@ void TicketWidget::on_pushButton_Update_clicked()
         ticket.Category = m_ui->comboBox_Category->itemData(m_ui->comboBox_Category->currentIndex(), Qt::UserRole).toInt();
         ticket.SubCategory = m_ui->comboBox_SubCategory->currentText();
         ticket.Priority = m_ui->comboBox_Priority->currentIndex() + 1;
-        QString temp = m_ui->comboBox_Status->itemData(m_ui->comboBox_Status->currentIndex(), Qt::UserRole).toString();
+        QString temp(m_ui->comboBox_Status->itemData(m_ui->comboBox_Status->currentIndex(), Qt::UserRole).toString());
         if (temp != ticket.Status)
         {
             ticket.StatusOld = ticket.StatusHidden;
-            ticket.StatusHidden = m_ui->comboBox_Status->itemData(m_ui->comboBox_Status->currentIndex(), Qt::UserRole).toString();
-            ticket.StatusChange = QString("yes");
+            ticket.StatusHidden = temp;
             ticket.Status = temp;
+            ticket.StatusChange = QString("yes");
         }
         ticket.AssignedGroup = m_ui->comboBox_Group->itemData(m_ui->comboBox_Group->currentIndex(), Qt::UserRole).toInt();
         ticket.AssignedTech.clear();
@@ -175,4 +175,9 @@ void TicketWidget::on_comboBox_Group_currentIndexChanged(int index)
 void TicketWidget::on_pushButton_Reset_clicked()
 {
     updateContent(ticket);
+}
+
+void TicketWidget::on_toolButton_clicked()
+{
+    emit getDomainInfo(m_ui->lineEdit_Domain->text());
 }

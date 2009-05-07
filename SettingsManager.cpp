@@ -2,6 +2,24 @@
 #include "SettingsManager.h"
 #include "SettingsDialog.h"
 
+/*
+    PigsAccount
+        pUsername - username    QString
+        pPassword - password    QString
+        pInterval - interval    int
+        pGroups   - groups      QList<int>
+
+    HostopAccoung
+        hUsername - username    QString
+        hPassword - password    QString
+
+    Gui
+        mwState - Main Window state     QByteArray
+        tIcon   - Show Tray Icon        bool
+        tMess   - Show Tray Message     bool
+        iLang   - Interface Language    QString
+*/
+
 SettingsManager::SettingsManager(QObject * parent) : QObject(parent)
 {
 }
@@ -9,34 +27,23 @@ SettingsManager::SettingsManager(QObject * parent) : QObject(parent)
 void SettingsManager::loadConfig()
 {
     QSettings sett;
-    QString groups;
+
     sett.beginGroup("PigsAccount");
-    pigsAccount.user = sett.value("username", QString()).toString();
-    pigsAccount.pass = sett.value("password", QString()).toString();
-    groups = sett.value("groups", QString()).toString();
-    if (!groups.isEmpty())
-    {
-        QStringList gr = groups.split(':');
-        for(int i = 0; i < gr.size(); ++i)
-            if (gr.at(i).toInt() != 0)
-                pigsGroups.append(gr.at(i).toInt());
-    }
-    timerInterval = sett.value("interval", int(0)).toInt();
+    QStringList keys(sett.allKeys());
+    for (QStringList::const_iterator iter = keys.constBegin(); iter != keys.constEnd(); ++iter)
+        _settings.insert(*iter, sett.value(*iter));
     sett.endGroup();
 
     sett.beginGroup("HostopAccount");
-    hostopAccount.user = sett.value(QString("username"), QString()).toString();
-    hostopAccount.pass = sett.value(QString("password"), QString()).toString();
+    keys = QStringList(sett.allKeys());
+    for (QStringList::const_iterator iter = keys.constBegin(); iter != keys.constEnd(); ++iter)
+        _settings.insert(*iter, sett.value(*iter));
     sett.endGroup();
 
     sett.beginGroup("Gui");
-    mainWindowState = sett.value("mainWindowState", QByteArray()).toByteArray();
-    trayIcon = sett.value("trayicon", false).toBool();
-    trayMessages = sett.value("traymess", false).toBool();
-    if (sett.value("lang", QString()).toString() == QString("RU"))
-        ru_lang = true;
-    else
-        ru_lang = false;
+    keys = QStringList(sett.allKeys());
+    for (QStringList::const_iterator iter = keys.constBegin(); iter != keys.constEnd(); ++iter)
+        _settings.insert(*iter, sett.value(*iter));
     sett.endGroup();
 
     emit settingsChanged();
@@ -46,56 +53,85 @@ void SettingsManager::saveConfig()
 {
     QSettings sett;
     sett.clear();
-    if (pigsAccount.isValid()) {
-        QString groups;
-        for (int i = 0; i < pigsGroups.size(); ++i)
-            groups.append(QString::number(pigsGroups.at(i))).append(":");
-        if (groups.endsWith(':')) groups.remove(groups.size() - 1, 1);
 
-        sett.beginGroup("PigsAccount");
-        sett.setValue("username", pigsAccount.user);
-        sett.setValue("password", pigsAccount.pass);
-        sett.setValue("groups", groups);
-        sett.setValue("interval", timerInterval);
-        sett.endGroup();
-    }
-
-    if (hostopAccount.isValid())
+    sett.beginGroup("PigsAccount");
+    QString user(_settings.value(QString("pUsername")).toString());
+    QString pass(_settings.value(QString("pPassword")).toString());
+    if (!user.isEmpty() && !pass.isEmpty())
     {
-        sett.beginGroup("HostopAccount");
-        sett.setValue(QString("username"), hostopAccount.user);
-        sett.setValue(QString("password"), hostopAccount.pass);
-        sett.endGroup();
+        sett.setValue(QString("pUsername"), user);
+        sett.setValue(QString("pPassword"), pass);
+        sett.setValue(QString("pInterval"), _settings.value(QString("pInterval")));
+        sett.setValue(QString("pGroups"), _settings.value(QString("pGroups")));
     }
+    sett.endGroup();
+
+    sett.beginGroup("HostopAccount");
+    user = _settings.value(QString("hUsername")).toString();
+    pass = _settings.value(QString("hPassword")).toString();
+    if (!user.isEmpty() && !pass.isEmpty())
+    {
+        sett.setValue(QString("hUsername"), user);
+        sett.setValue(QString("hPassword"), pass);
+    }
+    sett.endGroup();
 
     sett.beginGroup("Gui");
-    sett.setValue("mainWindowState", mainWindowState);
-    sett.setValue("trayicon", trayIcon);
-    sett.setValue("traymess", trayMessages);
-    if (ru_lang)
-        sett.setValue("lang", QString("RU"));
+    sett.setValue(QString("mwState"), _settings.value(QString("mwState")));
+    sett.setValue(QString("tIcon"), _settings.value(QString("tIcon")));
+    sett.setValue(QString("tMess"), _settings.value(QString("tMess")));
+    if (_settings.value(QString("iLang")).toString() == QString("RU"))
+        sett.setValue(QString("iLang"), _settings.value(QString("iLang")));
+    sett.setValue("mDebug", _settings.value("mDebug"));
     sett.endGroup();
 }
 
 void SettingsManager::showDialog()
 {
     SettingsDialog dlg((QWidget *)this->parent());
-    dlg.setPigsAccount(pigsAccount);
-    dlg.setHostopAccount(hostopAccount);
-    dlg.setTimerInterval(timerInterval);
-    dlg.setTrayIcon(trayIcon);
-    dlg.setTrayMess(trayMessages);
-    if (dlg.exec() == QDialog::Accepted)
-    {
-        if (dlg.getPigsAccount().isValid()) pigsAccount = dlg.getPigsAccount();
-        else pigsAccount.clear();
-        if (dlg.getHostopAccount().isValid()) hostopAccount = dlg.getHostopAccount();
-        else hostopAccount.clear();
-        timerInterval = dlg.getTimerInterval();
-        trayIcon = dlg.getTrayIcon();
-        trayMessages = dlg.getTrayMess();
+    dlg.setPigsAccount(Account(_settings.value("pUsername").toString(), _settings.value("pPassword").toString()));
+    dlg.setHostopAccount(Account(_settings.value("hUsername").toString(), _settings.value("hPassword").toString()));
+    dlg.setTimerInterval(_settings.value("pInterval").toInt());
+    dlg.setTrayIcon(_settings.value("tIcon").toBool());
+    dlg.setTrayMess(_settings.value("tMess").toBool());
+    dlg.setDebug(_settings.value("mDebug").toBool());
+    if (dlg.exec() == QDialog::Accepted) {
+        Account acc = dlg.getPigsAccount();
+        if (acc.isValid()) {
+
+            _settings.insert("pUsername", acc.user);
+            _settings.insert("pPassword", acc.pass);
+        } else {
+            _settings.remove("pUsername");
+            _settings.remove("pPassword");
+        }
+        acc = dlg.getHostopAccount();
+        if (acc.isValid()) {
+            _settings.insert("hUsername", acc.user);
+            _settings.insert("hPassword", acc.pass);
+
+        } else {
+            _settings.remove("hUsername");
+            _settings.remove("hPassword");
+        }
+
+        _settings.insert("pInterval", dlg.getTimerInterval());
+        _settings.insert("tIcon", dlg.getTrayIcon());
+        _settings.insert("tMess", dlg.getTrayMess());
+        _settings.insert("mDebug", dlg.getDebug());
+
         emit settingsChanged();
     }
+}
+
+QVariant SettingsManager::getOption(const QString & name) const
+{
+    return _settings.value(name);
+}
+
+void SettingsManager::setOption(const QString & name, const QVariant & value)
+{
+    _settings.insert(name, value);
 }
 
 SettingsManager::~SettingsManager()

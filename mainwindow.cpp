@@ -7,6 +7,7 @@
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
 {
+    // Init variables with internal name
     timer = new QTimer(this);
     timer->setObjectName("timer");
 
@@ -22,52 +23,65 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     hostoper = new HostoperButton(this);
     hostoper->setObjectName("hostoper");
 
+    // Set default language
     appTranslator = new QTranslator(this);
     appTranslator->load(":/ru.qm");
 
     ui.setupUi(this);
 
+    // Cleanup status bar after Pigser client request finished
     this->connect(pigser, SIGNAL(groupTicketsReady(int,QList<TicketInfo>)), SLOT(clearStatusBar()));
     this->connect(pigser, SIGNAL(ticketReady(Ticket)), SLOT(clearStatusBar()));
+    this->connect(pigser, SIGNAL(domainInfoReady(QString)), SLOT(clearStatusBar()));
     this->connect(pigser, SIGNAL(searchReady(QList<TicketInfo>)), SLOT(clearStatusBar()));
     this->connect(pigser, SIGNAL(error(QString,PigsRequest,int)), SLOT(clearStatusBar()));
 
+    // Add View menu actions
+    ui.menuToolBar->addAction(ui.mainToolBar->toggleViewAction());
     ui.menuView->addAction(ui.dockWidget_Cases->toggleViewAction());
     ui.menuView->addAction(ui.dockWidget_Search->toggleViewAction());
-    ui.menuToolbar->addAction(ui.toolBar_TicketWidget->toggleViewAction());
+    ui.menuView->addAction(ui.dockWidget_DomainInfo->toggleViewAction());
 
+    // Connect Tool buttons with their actions
+    ui.toolButton_NewTicket->setDefaultAction(ui.actionNewTicket);
+    ui.toolButton_ReloadTicket->setDefaultAction(ui.actionReloadTicket);
+    ui.toolButton_CloseTicket->setDefaultAction(ui.actionCloseTicket);
+
+    // Auto refresh by timer
     this->connect(timer, SIGNAL(timeout()), ui.actionReloadAllGroups, SLOT(trigger()));
 
+    // Notify icon menu
     QMenu * tMenu = new QMenu(this);
     tMenu->addAction(ui.actionReloadAllGroups);
     tMenu->addSeparator();
     tMenu->addAction(ui.actionQuit);
     tray->setContextMenu(tMenu);
 
-    ui.lineEdit->setValidator(new QIntValidator(1, INT_MAX, ui.lineEdit));
-    ui.lineEdit->connect(ui.actionOpenTicket, SIGNAL(triggered()), SLOT(show()));
-    ui.lineEdit->connect(ui.lineEdit, SIGNAL(editingFinished()), SLOT(hide()));
-    ui.lineEdit->hide();
-
+    // Show Hostoper button
     ui.statusBar->addPermanentWidget(hostoper);
 
+    // Language switch actions
     ui.actionRussian->connect(ui.actionRussian, SIGNAL(toggled(bool)), SLOT(setDisabled(bool)));
     ui.actionEnglish->connect(ui.actionEnglish, SIGNAL(toggled(bool)), SLOT(setDisabled(bool)));
 
+    // Try to load config
     settings->loadConfig();
 
-    this->restoreState(settings->getMainWindowState());
+    // Restote Main Window state
+    this->restoreState(settings->getOption("mwState").toByteArray());
 
-    QList<int> gr(settings->getPigsGroups());
+    // Restore Pigs groups
+    QStringList gr(settings->getOption("pGroups").toString().split(QChar(',')));
     for (int i = 0; i < gr.size(); ++i)
     {
         QTreeWidgetItem * root = new QTreeWidgetItem(ui.treeWidget, QStringList(QString("Unknown [%1]").arg(gr.at(i))));
         root->setData(0, Qt::UserRole, QVariant(false));
-        root->setData(0, Qt::UserRole + 1, QVariant(gr.at(i)));
+        root->setData(0, Qt::UserRole + 1, QVariant(gr.at(i).toInt()));
         root->setHidden(true);
     }
 
-    if (settings->getLang())
+    // Restore Language
+    if (settings->getOption("iLang").toString() == QString("RU"))
         ui.actionRussian->setChecked(true);
 }
 
@@ -75,6 +89,7 @@ TicketWidget * MainWindow::createTicketWidget(int id)
 {
     TicketWidget * tw = new TicketWidget(id);
     this->connect(tw, SIGNAL(updateTicket(Ticket &)), SLOT(updateTicket(Ticket &)));
+    this->connect(tw, SIGNAL(getDomainInfo(QString)), SLOT(getDomainInfo(QString)));
     return tw;
 }
 
@@ -135,6 +150,8 @@ void MainWindow::on_lineEdit_returnPressed()
         }
         else
             ui.tabWidget->setCurrentWidget(tw);
+    } else {
+        pigser->getDomainInfo(ui.lineEdit->text());
     }
 }
 
@@ -152,9 +169,13 @@ void MainWindow::updateTicket(Ticket & ticket)
     }
 }
 
+void MainWindow::getDomainInfo(const QString & domain)
+{
+    pigser->getDomainInfo(domain);
+}
+
 void MainWindow::on_pigser_globalsReady()
 {
-    QList<int> groups(settings->getPigsGroups());
     QTreeWidgetItem * root = ui.treeWidget->invisibleRootItem();
     for (int i = 0; i < root->childCount(); ++i)
     {
@@ -198,6 +219,8 @@ void MainWindow::on_pigser_groupTicketsReady(int id, const QList<TicketInfo> & t
         root->setToolTip(0, gText);
         root->setStatusTip(0, gText);
         root->setDisabled(true);
+        bool isSortingEnabled = ui.treeWidget->isSortingEnabled();
+        if (isSortingEnabled) ui.treeWidget->setSortingEnabled(false);
 
         for (int i = 0; i < tickets.size(); i++) {
             const TicketInfo & tk = tickets.at(i);
@@ -239,12 +262,16 @@ void MainWindow::on_pigser_groupTicketsReady(int id, const QList<TicketInfo> & t
         root->setDisabled(false);
         if (root->isHidden()) {
             root->setHidden(false);
-            if (root->childCount() > 0)
+            if (root->childCount() > 0) {
                 root->setExpanded(true);
+                for (int i = 0; i < ui.treeWidget->columnCount(); ++i)
+                    ui.treeWidget->resizeColumnToContents(i);
+            }
         }
-        ui.treeWidget->resizeColumnToContents(0);
 
-        if (newTickets && this->isHidden() && settings->showTrayMessages())
+        if (isSortingEnabled) ui.treeWidget->setSortingEnabled(true);
+
+        if (newTickets && this->isHidden() && settings->getOption("tMess").toBool())
         {
             if (trayMessages.size() == 0)
                 QTimer::singleShot(3000, this, SLOT(showTrayMessage()));
@@ -299,6 +326,13 @@ void MainWindow::on_pigser_ticketReady(const Ticket & ticket)
         QMessageBox::information(this, tr("Error"), tr("Invalid Case ID [%1]").arg(ticket.CaseID));
 }
 
+void MainWindow::on_pigser_domainInfoReady(const QString & info)
+{
+    if (ui.dockWidget_DomainInfo->isHidden())
+        ui.dockWidget_DomainInfo->show();
+    ui.dockWidget_DomainInfo->setFocus();
+}
+
 void MainWindow::on_pigser_error(QString error, PigsRequest req, int id)
 {
     QMessageBox::information(this, tr("Pigser"), error);
@@ -324,11 +358,12 @@ void MainWindow::on_hostoper_error(QString error)
 
 void MainWindow::on_settings_settingsChanged()
 {
-    pigser->setAccount(settings->getPigsAccount());
-    hostoper->setAccount(settings->getHostopAccount());
-    timer->setInterval(settings->getTimerInterval() * 60000);
+    pigser->setAccount(Account(settings->getOption("pUsername").toString(), settings->getOption("pPassword").toString()));
+    pigser->debug = settings->getOption("mDebug").toBool();
+    hostoper->setAccount(Account(settings->getOption("hUsername").toString(), settings->getOption("hPassword").toString()));
+    timer->setInterval(settings->getOption("pInterval").toInt() * 60000);
 
-    if (settings->showTrayIcon()) tray->show();
+    if (settings->getOption("tIcon").toBool()) tray->show();
     else tray->hide();
 }
 
@@ -637,20 +672,21 @@ void MainWindow::showTrayMessage()
 
 void MainWindow::changeEvent(QEvent *e)
 {
-    if((e->type() == QEvent::WindowStateChange) && (this->isMinimized()) && settings->showTrayIcon()) {
+    if((e->type() == QEvent::WindowStateChange) && (this->isMinimized()) && settings->getOption("tIcon").toBool()) {
         this->hide();
     }
 }
 
 MainWindow::~MainWindow()
 {
-    settings->setMainWindowState(this->saveState());
-    settings->setLang(ui.actionRussian->isChecked());
-    QList<int> gr;
+    settings->setOption("mwState", this->saveState());
+    if (ui.actionRussian->isChecked())
+        settings->setOption("iLang", QString("RU"));
+    QStringList gr;
     QTreeWidgetItem * root = ui.treeWidget->invisibleRootItem();
     for (int i = 0; i < root->childCount(); ++i)
-        gr.append(root->child(i)->data(0, Qt::UserRole + 1).toInt());
-    settings->setPigsGroups(gr);
+        gr.append(QString::number(root->child(i)->data(0, Qt::UserRole + 1).toInt()));
+    settings->setOption("pGroups", gr.join(","));
     settings->saveConfig();
 }
 

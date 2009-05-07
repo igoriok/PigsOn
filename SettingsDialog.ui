@@ -72,6 +72,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="checkBox_Debug">
+           <property name="text">
+            <string>Enable debug</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QCheckBox" name="checkBox">
            <property name="enabled">
             <bool>false</bool>

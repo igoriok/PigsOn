@@ -2,6 +2,8 @@
 #define SETTINGSMANAGER_H
 
 #include <QObject>
+#include <QMap>
+#include <QVariant>
 #include "SAccount.h"
 
 class SettingsManager : public QObject
@@ -20,29 +22,11 @@ signals:
     void settingsChanged();
 
 public:
-    Account getPigsAccount() const { return pigsAccount; }
-    Account getHostopAccount() const { return hostopAccount; }
-    QList<int> getPigsGroups() const { return pigsGroups; }
-    int getTimerInterval() const { return timerInterval; }
-    QByteArray getMainWindowState() const { return mainWindowState; }
-    bool getLang() const { return ru_lang; }
-    bool showTrayIcon() const { return trayIcon; }
-    bool showTrayMessages() const { return trayMessages; }
-
-    void setPigsGroups(QList<int> & groups) { pigsGroups = groups; }
-    void setMainWindowState(const QByteArray & state) { mainWindowState = state; }
-    void setLang(bool lang) { ru_lang = lang; }
+    QVariant getOption(const QString & name) const;
+    void setOption(const QString & name, const QVariant & value);
 
 private:
-    Account pigsAccount;
-    Account hostopAccount;
-    QList<int> pigsGroups;
-    int timerInterval;
-    QByteArray mainWindowState;
-    bool ru_lang;
-
-    bool trayIcon;
-    bool trayMessages;
+    QMap<QString, QVariant> _settings;
 };
 
 #endif // SETTINGSMANAGER_H

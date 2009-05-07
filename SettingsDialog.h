@@ -25,6 +25,8 @@ public:
     void setTrayIcon(bool b);
     bool getTrayMess() const;
     void setTrayMess(bool b);
+    bool getDebug() const;
+    void setDebug(bool b);
 
 protected:
     virtual void changeEvent(QEvent *e);

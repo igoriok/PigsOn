@@ -5,6 +5,7 @@
 #include <QtNetwork/QSslError>
 #include <QtGui/QMessageBox>
 #include <QtCore/QFile>
+#include <QtCore/QTextCodec>
 
 PigsClient::PigsClient(QObject * parent): GenericPigsClient(parent)
 {
@@ -115,6 +116,25 @@ void PigsClient::getTicket(int caseID)
     client->get(req);
 }
 
+void PigsClient::getDomainInfo(const QString & domain)
+{
+    emit showMessage(tr("Getting domain info %1...").arg(domain));
+    if (domain.isEmpty())
+    {
+        emit error(tr("Please provide correct domain name"), GetDomainInfo, 0);
+        return;
+    }
+
+    QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/cases.php?request=fhostopian")));
+    QByteArray postData("thisdomain=");
+    postData.append(toPostText(domain));
+
+    req.setAttribute((QNetworkRequest::Attribute)(QNetworkRequest::User + 1), QVariant((int)GetDomainInfo));
+    req.setAttribute((QNetworkRequest::Attribute)(QNetworkRequest::User + 2), QVariant(int(0)));
+
+    client->post(req, postData);
+}
+
 void PigsClient::createTicket(const Ticket & ticket)
 {
 }
@@ -122,14 +142,16 @@ void PigsClient::createTicket(const Ticket & ticket)
 void PigsClient::updateTicket(const Ticket & ticket)
 {
     emit showMessage(tr("Updating ticket %1...").arg(ticket.CaseID));
-    QByteArray data(prepareQuery(ticket));
-    QFile f(QString("./PigsON.log"));
-    if (f.open(QIODevice::Append))
+        QByteArray data(prepareQuery(ticket));
+    if (debug)
     {
-        f.write(QByteArray(data).replace('&', '\n').append("\n\n"));
-        f.close();
+        QFile f(QString("./PigsON.log"));
+        if (f.open(QIODevice::Append))
+        {
+            f.write(QByteArray(data).replace('&', '\n').append("\n\n"));
+            f.close();
+        }
     }
-
     QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/showcases.php")));
     req.setAttribute((QNetworkRequest::Attribute)(QNetworkRequest::User + 1), QVariant((int)UpdateTicket));
     req.setAttribute((QNetworkRequest::Attribute)(QNetworkRequest::User + 2), QVariant(ticket.CaseID));
@@ -337,9 +359,9 @@ void PigsClient::parseGroups(const QString & data)
     }
 }
 
-QStringMap PigsClient::parseSelect(const QString & data)
+QMap<QString, QString> PigsClient::parseSelect(const QString & data)
 {
-    QStringMap map;
+    QMap<QString, QString> map;
     QRegExp reg("<option[\\s]+value=((?:[\"\'][^\"\']*[\"\'])|(?:[^\"\'\\s>]*))([\\s]*SELECTED)?[^>]*>([^<]*)</option>", Qt::CaseInsensitive);
     for (int pos = 0; (pos = reg.indexIn(data, pos)) != -1; pos += reg.matchedLength())
     {
@@ -347,7 +369,7 @@ QStringMap PigsClient::parseSelect(const QString & data)
         if (!key.isEmpty())
         {
             map.insert(key, reg.cap(3));
-            if (!reg.cap(2).isEmpty())
+            if (!reg.cap(2).isEmpty() && !map.contains(QString()))
                 map.insert(QString(), key);
         }
     }
@@ -439,7 +461,7 @@ void PigsClient::on_client_finished(QNetworkReply * reply)
     }
     else
     {
-        QString cont(reply->readAll());
+        QString cont(QTextCodec::codecForName("Windows-1252")->toUnicode(reply->readAll()));
         if(cont.indexOf(QString("<br><h2>Access denied. Please log in again.</h2>")) == 0) // if login not accepted
             emit error(tr("Login or password not accepted!"), req, id);
         else
@@ -466,6 +488,12 @@ void PigsClient::on_client_finished(QNetworkReply * reply)
                             emit ticketReady(t);
                         else
                             emit error(tr("Returned Case ID is incorrect: %1").arg(t.CaseID), req, id);
+                    }
+                    break;
+                case GetDomainInfo:
+                    {
+                        int pos = 0;
+                        emit domainInfoReady(subString(QString("<font color=red>(**domain name must match exactly)</font><br><br>"), QString("</center>"), pos, cont));
                     }
                     break;
                 case CreateTicket:

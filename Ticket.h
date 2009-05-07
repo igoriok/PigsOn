@@ -30,8 +30,10 @@ public:
     QString Domain;
     QString Name;
     QString Email;
+    QMap<QString, QString> CategoryList;
     int Category;
     QString CategoryHidden;
+    QMap<QString, QString> SubCategoryList;
     QString SubCategory;
     QString SubCategoryHidden;
     QString Problem;
@@ -50,7 +52,8 @@ public:
     int AssignedGroup;
     QString TechName;
     QString TechEmail;
-    QStringMap AssignedTech;
+    QMap<QString, QString> AssignedTechList;
+    QMap<QString, QString> AssignedTech;
     QString AssignedTechHidden;
     QString AuditTrail;
     QString AuditHidden;

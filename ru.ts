@@ -22,89 +22,89 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="254"/>
+        <location filename="mainwindow.cpp" line="278"/>
         <source>%1 new ticket(s)</source>
         <translation>%1 новых тикетов</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="258"/>
-        <location filename="mainwindow.cpp" line="302"/>
+        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="326"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="258"/>
+        <location filename="mainwindow.cpp" line="282"/>
         <source>Invalid Group ID [%1]</source>
         <translation>Неправильный Group ID [%1]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="302"/>
+        <location filename="mainwindow.cpp" line="326"/>
         <source>Invalid Case ID [%1]</source>
         <translation>Неправильный Case ID[%1]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="307"/>
+        <location filename="mainwindow.cpp" line="338"/>
         <source>Pigser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="325"/>
+        <location filename="mainwindow.cpp" line="356"/>
         <source>Hostoper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="374"/>
-        <location filename="mainwindow.cpp" line="467"/>
+        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="499"/>
         <source>Edit Ticket</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="376"/>
+        <location filename="mainwindow.cpp" line="408"/>
         <source>Mark as Read</source>
         <translation>Просмотрен</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="380"/>
+        <location filename="mainwindow.cpp" line="412"/>
         <source>Reload Group</source>
         <translation>Обновить группу</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="381"/>
+        <location filename="mainwindow.cpp" line="413"/>
         <source>Remove Group</source>
         <translation>Удалить группу</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="415"/>
         <source>Mark All as Read</source>
         <translation>Все просмотрены</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="388"/>
+        <location filename="mainwindow.cpp" line="420"/>
         <source>Add Group</source>
         <translation>Добавить группу</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="401"/>
+        <location filename="mainwindow.cpp" line="433"/>
         <source>None</source>
         <translation>Пусто</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="412"/>
+        <location filename="mainwindow.cpp" line="444"/>
         <source>Unknown [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="470"/>
+        <location filename="mainwindow.cpp" line="502"/>
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="494"/>
+        <location filename="mainwindow.cpp" line="526"/>
         <source>New Ticket</source>
         <translation>Новый тикет</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="625"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -117,130 +117,122 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="82"/>
+        <location filename="mainwindow.ui" line="131"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;Вид</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="86"/>
-        <source>Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="94"/>
+        <location filename="mainwindow.ui" line="142"/>
+        <location filename="mainwindow.ui" line="169"/>
         <source>Actions</source>
         <translation type="unfinished">Действия</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="152"/>
+        <location filename="mainwindow.ui" line="192"/>
         <source>Cases</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Тикеты</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="188"/>
-        <location filename="mainwindow.ui" line="280"/>
+        <location filename="mainwindow.ui" line="224"/>
+        <location filename="mainwindow.ui" line="316"/>
         <source>CaseID</source>
         <translation type="unfinished">Тикет</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="193"/>
-        <location filename="mainwindow.ui" line="285"/>
+        <location filename="mainwindow.ui" line="229"/>
+        <location filename="mainwindow.ui" line="321"/>
         <source>Category</source>
         <translation type="unfinished">Категория</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="198"/>
-        <location filename="mainwindow.ui" line="290"/>
+        <location filename="mainwindow.ui" line="234"/>
+        <location filename="mainwindow.ui" line="326"/>
         <source>Hostopian</source>
         <translation type="unfinished">Партнёр</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="203"/>
-        <location filename="mainwindow.ui" line="295"/>
+        <location filename="mainwindow.ui" line="239"/>
+        <location filename="mainwindow.ui" line="331"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="208"/>
-        <location filename="mainwindow.ui" line="300"/>
+        <location filename="mainwindow.ui" line="244"/>
+        <location filename="mainwindow.ui" line="336"/>
         <source>Domain</source>
         <translation type="unfinished">Домен</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="213"/>
-        <location filename="mainwindow.ui" line="305"/>
+        <location filename="mainwindow.ui" line="249"/>
+        <location filename="mainwindow.ui" line="341"/>
         <source>Status</source>
         <translation type="unfinished">Статус</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="218"/>
-        <location filename="mainwindow.ui" line="310"/>
+        <location filename="mainwindow.ui" line="254"/>
+        <location filename="mainwindow.ui" line="346"/>
         <source>Priority</source>
         <translation type="unfinished">Приоритет</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="223"/>
-        <location filename="mainwindow.ui" line="315"/>
+        <location filename="mainwindow.ui" line="259"/>
+        <location filename="mainwindow.ui" line="351"/>
         <source>Opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="233"/>
+        <location filename="mainwindow.ui" line="269"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="341"/>
-        <source>&amp;Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="368"/>
-        <source>Ctrl+R, F5</source>
+        <location filename="mainwindow.ui" line="361"/>
+        <source>DomainInfo</source>
+        <oldsource>Domain Info</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="395"/>
-        <source>Ctrl+Q, Ctrl+X</source>
+        <source>&amp;Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="458"/>
+        <location filename="mainwindow.ui" line="518"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="461"/>
+        <location filename="mainwindow.ui" line="521"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="66"/>
+        <location filename="mainwindow.ui" line="115"/>
         <source>&amp;Ticket</source>
         <translation type="unfinished">Тикет</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="75"/>
+        <location filename="mainwindow.ui" line="124"/>
         <source>&amp;Help</source>
         <translation type="unfinished">Помощь</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="98"/>
+        <location filename="mainwindow.ui" line="135"/>
+        <source>ToolBar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="146"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="329"/>
+        <location filename="mainwindow.ui" line="383"/>
         <source>&amp;New</source>
         <translation>Создать</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="332"/>
+        <location filename="mainwindow.ui" line="386"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
@@ -249,67 +241,77 @@
         <translation type="obsolete">Найти</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="344"/>
+        <location filename="mainwindow.ui" line="398"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="353"/>
+        <location filename="mainwindow.ui" line="410"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="356"/>
+        <location filename="mainwindow.ui" line="413"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="365"/>
+        <location filename="mainwindow.ui" line="425"/>
         <source>&amp;Reload</source>
         <translation>Обновть</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="377"/>
+        <location filename="mainwindow.ui" line="428"/>
+        <source>Ctrl+R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="437"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="380"/>
+        <location filename="mainwindow.ui" line="440"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="392"/>
+        <location filename="mainwindow.ui" line="452"/>
         <source>&amp;Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="407"/>
+        <location filename="mainwindow.ui" line="455"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="467"/>
         <source>AboutQt</source>
         <translation>Об Qt</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="419"/>
+        <location filename="mainwindow.ui" line="479"/>
         <source>Reload All Groups</source>
         <translation>Обновить все группы</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="428"/>
+        <location filename="mainwindow.ui" line="488"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="431"/>
+        <location filename="mainwindow.ui" line="491"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="445"/>
+        <location filename="mainwindow.ui" line="505"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="453"/>
+        <location filename="mainwindow.ui" line="513"/>
         <source>Russian</source>
         <translation type="unfinished"></translation>
     </message>
@@ -317,52 +319,62 @@
 <context>
     <name>PigsClient</name>
     <message>
-        <location filename="PigsClient.cpp" line="49"/>
+        <location filename="PigsClient.cpp" line="50"/>
         <source>Retrieve Globals...</source>
-        <translation type="unfinished">Получаю параметры...</translation>
+        <translation>Получаю параметры...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="58"/>
+        <location filename="PigsClient.cpp" line="59"/>
         <source>Retrieve %1 tickets...</source>
-        <translation type="unfinished">Получаю тикеты %1...</translation>
+        <translation>Получаю тикеты %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="61"/>
+        <location filename="PigsClient.cpp" line="62"/>
         <source>Please provide correct Group ID</source>
         <translation>Укажите правильный Group ID</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="85"/>
+        <location filename="PigsClient.cpp" line="86"/>
         <source>Searching...</source>
-        <translation type="unfinished">Поиск...</translation>
+        <translation>Поиск...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="105"/>
+        <location filename="PigsClient.cpp" line="106"/>
         <source>Retrieve ticket %1...</source>
-        <translation type="unfinished">Получаю тикет %1...</translation>
+        <translation>Получаю тикет %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="108"/>
+        <location filename="PigsClient.cpp" line="109"/>
         <source>Please provide correct Case ID</source>
         <translation>Укажите правильный Case ID</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="124"/>
-        <source>Updating ticket %1...</source>
-        <translation type="unfinished">Обновляю тикет %1...</translation>
+        <location filename="PigsClient.cpp" line="121"/>
+        <source>Getting domain info %1...</source>
+        <translation type="unfinished">Получаю информацию о домене %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="444"/>
+        <location filename="PigsClient.cpp" line="124"/>
+        <source>Please provide correct domain name</source>
+        <translation type="unfinished">Укажите правильное доменное имя</translation>
+    </message>
+    <message>
+        <location filename="PigsClient.cpp" line="144"/>
+        <source>Updating ticket %1...</source>
+        <translation>Обновляю тикет %1...</translation>
+    </message>
+    <message>
+        <location filename="PigsClient.cpp" line="466"/>
         <source>Login or password not accepted!</source>
         <translation>Логин или пароль не приняты!</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="468"/>
+        <location filename="PigsClient.cpp" line="490"/>
         <source>Returned Case ID is incorrect: %1</source>
         <translation>Неверный Case ID [%1]</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="477"/>
+        <location filename="PigsClient.cpp" line="505"/>
         <source>Unknown request</source>
         <translation>Неверный запрос</translation>
     </message>
@@ -413,24 +425,29 @@
         <translation>Показывать сообщения в трее</translation>
     </message>
     <message>
-        <location filename="SettingsDialog.ui" line="80"/>
+        <location filename="SettingsDialog.ui" line="77"/>
+        <source>Enable debug</source>
+        <translation>Включить дебаг</translation>
+    </message>
+    <message>
+        <location filename="SettingsDialog.ui" line="87"/>
         <source>Jump to open ticket</source>
         <translation>Переходить на открываемый тикет</translation>
     </message>
     <message>
-        <location filename="SettingsDialog.ui" line="106"/>
-        <location filename="SettingsDialog.ui" line="201"/>
+        <location filename="SettingsDialog.ui" line="113"/>
+        <location filename="SettingsDialog.ui" line="208"/>
         <source>Username</source>
         <translation>Логин</translation>
     </message>
     <message>
-        <location filename="SettingsDialog.ui" line="116"/>
-        <location filename="SettingsDialog.ui" line="191"/>
+        <location filename="SettingsDialog.ui" line="123"/>
+        <location filename="SettingsDialog.ui" line="198"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="SettingsDialog.ui" line="134"/>
+        <location filename="SettingsDialog.ui" line="141"/>
         <source>Check periodicaly</source>
         <translation>Переодически проверять</translation>
     </message>
@@ -438,61 +455,61 @@
 <context>
     <name>TicketWidget</name>
     <message>
-        <location filename="TicketWidget.cpp" line="66"/>
         <location filename="TicketWidget.cpp" line="68"/>
         <location filename="TicketWidget.cpp" line="70"/>
         <location filename="TicketWidget.cpp" line="72"/>
         <location filename="TicketWidget.cpp" line="74"/>
         <location filename="TicketWidget.cpp" line="76"/>
         <location filename="TicketWidget.cpp" line="78"/>
-        <location filename="TicketWidget.cpp" line="79"/>
+        <location filename="TicketWidget.cpp" line="80"/>
+        <location filename="TicketWidget.cpp" line="81"/>
         <source>Alert</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="66"/>
+        <location filename="TicketWidget.cpp" line="68"/>
         <source>Please specify Hostopian!</source>
         <translation>Пожалуйста выберите Партнёра!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="68"/>
+        <location filename="TicketWidget.cpp" line="70"/>
         <source>Please specify Category!</source>
         <translation>Пожалуйста выберите Категорию!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="70"/>
+        <location filename="TicketWidget.cpp" line="72"/>
         <source>Please specify SubCategory!</source>
         <translation>Пожалуйста выберите Подкатегорию!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="72"/>
+        <location filename="TicketWidget.cpp" line="74"/>
         <source>Please specify Priority!</source>
         <translation>Пожалуйста укажите Приоритет!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="74"/>
+        <location filename="TicketWidget.cpp" line="76"/>
         <source>Please specify Status!</source>
         <translation>Пожалуйста укажите Статус!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="76"/>
+        <location filename="TicketWidget.cpp" line="78"/>
         <source>Please specify Assigned Group!</source>
         <translation>Пожалуйста выберите Группу!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="78"/>
+        <location filename="TicketWidget.cpp" line="80"/>
         <source>Please specify Assigned Tech!</source>
         <translation>Пожалуйста выберите Теха!</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="79"/>
+        <location filename="TicketWidget.cpp" line="81"/>
         <source>Proceed?</source>
         <translation>Продолжить?</translation>
     </message>
     <message>
-        <location filename="TicketWidget.cpp" line="27"/>
-        <location filename="TicketWidget.cpp" line="28"/>
-        <location filename="TicketWidget.cpp" line="119"/>
+        <location filename="TicketWidget.cpp" line="29"/>
+        <location filename="TicketWidget.cpp" line="30"/>
+        <location filename="TicketWidget.cpp" line="122"/>
         <location filename="TicketWidget.ui" line="32"/>
         <source>CaseID</source>
         <translation>Тикет</translation>
@@ -523,106 +540,92 @@
         <translation>Домен</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="135"/>
+        <location filename="TicketWidget.ui" line="132"/>
         <source>Sub Category</source>
         <translation>Подкатегория</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="155"/>
+        <location filename="TicketWidget.ui" line="152"/>
         <source>Customer Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="168"/>
+        <location filename="TicketWidget.ui" line="165"/>
         <source>Priority</source>
         <translation>Приоритет</translation>
     </message>
     <message>
         <location filename="TicketWidget.ui" line="182"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="TicketWidget.ui" line="187"/>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="TicketWidget.ui" line="192"/>
-        <source>3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="TicketWidget.ui" line="197"/>
-        <source>4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="TicketWidget.ui" line="202"/>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="TicketWidget.ui" line="210"/>
         <source>Email</source>
         <translation>E-mail</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="223"/>
+        <location filename="TicketWidget.ui" line="195"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="243"/>
+        <location filename="TicketWidget.ui" line="215"/>
         <source>Opened by</source>
         <translation>Кем открыт</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="260"/>
+        <location filename="TicketWidget.ui" line="232"/>
         <source>Assigned to Group</source>
         <translation>Группа</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="273"/>
+        <location filename="TicketWidget.ui" line="245"/>
         <source>Closed by</source>
         <translation>Кем закрыт</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="290"/>
+        <location filename="TicketWidget.ui" line="262"/>
         <source>Assigned to Person</source>
         <translation>Тех</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="313"/>
+        <location filename="TicketWidget.ui" line="326"/>
         <source>Problem</source>
         <translation>Проблема</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="333"/>
+        <location filename="TicketWidget.ui" line="342"/>
         <source>Notes</source>
         <translation>Примечания</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="352"/>
+        <location filename="TicketWidget.ui" line="361"/>
         <source>Resolution</source>
         <translation>Решение</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="368"/>
+        <location filename="TicketWidget.ui" line="377"/>
         <source>Audit Trail</source>
         <translation>Аудит</translation>
+    </message>
+    <message>
+        <location filename="TicketWidget.ui" line="420"/>
+        <source>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 200, 180, 255))
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="TicketWidget.ui" line="437"/>
+        <source>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 222, 0, 255), stop:1 rgba(195, 220, 195, 255))</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Previous Audit</source>
         <translation type="obsolete">История</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="392"/>
+        <location filename="TicketWidget.ui" line="440"/>
         <source>Update</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="TicketWidget.ui" line="405"/>
+        <location filename="TicketWidget.ui" line="424"/>
         <source>Reset</source>
         <translation>Восстановить</translation>
     </message>

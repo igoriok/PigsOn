@@ -17,6 +17,7 @@ enum PigsRequest
     GetGroupTickets,
     SearchTickets,
     GetTicket,
+    GetDomainInfo,
     CreateTicket,
     UpdateTicket
 };
@@ -26,16 +27,18 @@ class GenericPigsClient : public QObject
 {
     Q_OBJECT
 public:
-    GenericPigsClient(QObject * parent) : QObject(parent) {}
+    GenericPigsClient(QObject * parent) : QObject(parent), debug(false) {}
     virtual ~GenericPigsClient() {}
 
     virtual void setAccount(Account acc) =0;
+    bool debug;
 
 public slots:
     virtual void refreshGlobals() =0;
     virtual void getGroupTickets(int groupID) =0;
     virtual void searchTickets(const QMap<QString, QString> & data) = 0;
     virtual void getTicket(int caseID) =0;
+    virtual void getDomainInfo(const QString & domain) =0;
     virtual void createTicket(const Ticket & ticket) =0;
     virtual void updateTicket(const Ticket & ticket) =0;
 
@@ -44,6 +47,7 @@ signals:
     void groupTicketsReady(int id, const QList<TicketInfo> & tickets);
     void searchReady(const QList<TicketInfo> & tickets);
     void ticketReady(const Ticket & ticket);
+    void domainInfoReady(const QString & info);
     void error(QString error, PigsRequest req, int id);
     void showMessage(QString mess);
 };
@@ -63,6 +67,7 @@ public:
     virtual void getGroupTickets(int groupID);
     virtual void searchTickets(const QMap<QString, QString> & data);
     virtual void getTicket(int caseID);
+    virtual void getDomainInfo(const QString & domain);
     virtual void createTicket(const Ticket & ticket);
     virtual void updateTicket(const Ticket & ticket);
 
@@ -78,7 +83,7 @@ private:
     void parseSubCategories(const QString & data);
     void parseGlobalTechs(const QString & data);
     void parseGroups(const QString & data);
-    QStringMap parseSelect(const QString & data);
+    QMap<QString, QString> parseSelect(const QString & data);
     QList<TicketInfo> parseTicketInfo(const QString & data);
     QByteArray prepareQuery(const Ticket & ticket);
     QByteArray toPostText(const QString & text);

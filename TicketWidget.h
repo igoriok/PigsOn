@@ -4,6 +4,7 @@
 #include <QtCore/QHash>
 #include <QtGui/QWidget>
 #include <QtGui/QMenu>
+#include <QtGui/QMovie>
 #include "Ticket.h"
 
 namespace Ui {
@@ -25,6 +26,7 @@ private:
     Ticket ticket;
 
 private slots:
+    void on_toolButton_clicked();
     void on_pushButton_Reset_clicked();
     void on_comboBox_Category_currentIndexChanged(int index);
     void on_comboBox_Group_currentIndexChanged(int index);
@@ -35,6 +37,7 @@ protected:
 
 signals:
     void updateTicket(Ticket & ticket);
+    void getDomainInfo(const QString & domain);
 };
 
 #endif // TICKETWIDGET_H

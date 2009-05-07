@@ -35,6 +35,55 @@
      <number>0</number>
     </property>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QToolButton" name="toolButton_NewTicket">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton_ReloadTicket">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton_CloseTicket">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -81,13 +130,12 @@
     <property name="title">
      <string>&amp;View</string>
     </property>
-    <widget class="QMenu" name="menuToolbar">
+    <widget class="QMenu" name="menuToolBar">
      <property name="title">
-      <string>Toolbar</string>
+      <string>ToolBar</string>
      </property>
     </widget>
-    <addaction name="menuToolbar"/>
-    <addaction name="separator"/>
+    <addaction name="menuToolBar"/>
    </widget>
    <widget class="QMenu" name="menuAction">
     <property name="title">
@@ -114,6 +162,12 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="windowTitle">
+    <string>Actions</string>
+   </property>
    <property name="iconSize">
     <size>
      <width>24</width>
@@ -126,27 +180,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionReloadAllGroups"/>
    <addaction name="actionSearchTickets"/>
    <addaction name="actionSettings"/>
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar_TicketWidget">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionNewTicket"/>
-   <addaction name="separator"/>
-   <addaction name="actionReloadTicket"/>
-   <addaction name="actionCloseTicket"/>
-  </widget>
   <widget class="QDockWidget" name="dockWidget_Cases">
    <property name="windowTitle">
     <string>Cases</string>
@@ -163,18 +203,14 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QTreeWidget" name="treeWidget">
        <property name="contextMenuPolicy">
         <enum>Qt::CustomContextMenu</enum>
        </property>
        <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
         <bool>true</bool>
        </property>
        <property name="animated">
@@ -320,6 +356,24 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="dockWidget_DomainInfo">
+   <property name="windowTitle">
+    <string>DomainInfo</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_8">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTextBrowser" name="textBrowser_DomainInfo"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionNewTicket">
    <property name="icon">
     <iconset resource="Resources.qrc">
@@ -345,6 +399,9 @@
    </property>
   </action>
   <action name="actionCloseTicket">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
      <normaloff>:/res/cancel.png</normaloff>:/res/cancel.png</iconset>
@@ -357,6 +414,9 @@
    </property>
   </action>
   <action name="actionReloadTicket">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
      <normaloff>:/res/redo.png</normaloff>:/res/redo.png</iconset>
