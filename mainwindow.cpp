@@ -437,10 +437,8 @@ void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint & pos)
 
     QAction * result = menu.exec(pt);
 
-    if (result != NULL)
-    {
-        if (result->parentWidget() == addGroup)
-        {
+    if (result != NULL) {
+        if (result->parentWidget() == addGroup) {
             int grID = result->data().toInt();
             QTreeWidgetItem * root = new QTreeWidgetItem(QStringList(Ticket::Groups.value(grID, tr("Unknown [%1]").arg(grID))));
             root->setData(0, Qt::UserRole, QVariant(false));
@@ -448,29 +446,29 @@ void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint & pos)
             ui.treeWidget->addTopLevelItem(root);
             pigser->getGroupTickets(grID);
         }
-        else if (result == removeGroup)
-        {
+        else if (result == removeGroup) {
             ui.treeWidget->invisibleRootItem()->removeChild(item);
         }
-        else if (result == reloadGroup)
-        {
+        else if (result == reloadGroup) {
             item->setDisabled(true);
             pigser->getGroupTickets(item->data(0, Qt::UserRole + 1).toInt());
         }
-        else if (result == editTicket)
-        {
+        else if (result == editTicket) {
             openTicketWidget(item->data(0, Qt::UserRole + 1).toInt());
         }
-        else if (result == markRead)
+        else if (result == markRead) {
             for (int k = 0; k < item->columnCount(); ++k)
                 item->setBackgroundColor(k, QColor(255, 255, 255));
-        else if (result == markAllRead)
-            for (int i = 0; i < item->childCount(); ++i)
-            {
+        }
+        else if (result == markAllRead) {
+            ui.treeWidget->setSortingEnabled(false);
+            for (int i = 0; i < item->childCount(); ++i) {
                 if (item->child(i)->backgroundColor(0) == QColor(0, 255, 0))
                     for (int k = 0; k < item->child(i)->columnCount(); ++k)
                         item->child(i)->setBackgroundColor(k, QColor(255, 255, 255));
             }
+            ui.treeWidget->setSortingEnabled(true);
+        }
     }
 }
 
