@@ -324,64 +324,64 @@
     </message>
 </context>
 <context>
-    <name>PigsClient</name>
+    <name>HtmlPigsClient</name>
     <message>
-        <location filename="PigsClient.cpp" line="50"/>
+        <location filename="HtmlPigsClient.cpp" line="50"/>
         <source>Retrieve Globals...</source>
         <translation>Получаю параметры...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="59"/>
+        <location filename="HtmlPigsClient.cpp" line="59"/>
         <source>Retrieve %1 tickets...</source>
         <translation>Получаю тикеты %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="62"/>
+        <location filename="HtmlPigsClient.cpp" line="62"/>
         <source>Please provide correct Group ID</source>
         <translation>Укажите правильный Group ID</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="86"/>
+        <location filename="HtmlPigsClient.cpp" line="86"/>
         <source>Searching...</source>
         <translation>Поиск...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="106"/>
+        <location filename="HtmlPigsClient.cpp" line="106"/>
         <source>Retrieve ticket %1...</source>
         <translation>Получаю тикет %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="109"/>
+        <location filename="HtmlPigsClient.cpp" line="109"/>
         <source>Please provide correct Case ID</source>
         <translation>Укажите правильный Case ID</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="121"/>
+        <location filename="HtmlPigsClient.cpp" line="121"/>
         <source>Getting domain info %1...</source>
         <translation type="unfinished">Получаю информацию о домене %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="124"/>
+        <location filename="HtmlPigsClient.cpp" line="124"/>
         <source>Please provide correct domain name</source>
         <translation type="unfinished">Укажите правильное доменное имя</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="144"/>
+        <location filename="HtmlPigsClient.cpp" line="144"/>
         <source>Updating ticket %1...</source>
         <translation>Обновляю тикет %1...</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="466"/>
+        <location filename="HtmlPigsClient.cpp" line="466"/>
         <source>Login or password not accepted!</source>
         <translation>Логин или пароль не приняты!</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="490"/>
+        <location filename="HtmlPigsClient.cpp" line="490"/>
         <source>Returned Case ID is incorrect: %1</source>
         <translation>Неверный Case ID [%1]</translation>
     </message>
     <message>
-        <location filename="PigsClient.cpp" line="505"/>
+        <location filename="HtmlPigsClient.cpp" line="505"/>
         <source>Unknown request</source>
         <translation>Неверный запрос</translation>
     </message>

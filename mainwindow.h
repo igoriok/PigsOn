@@ -9,7 +9,7 @@
 #include "ui_mainwindow.h"
 #include "SettingsManager.h"
 #include "HostoperButton.h"
-#include "PigsClient.h"
+#include "HtmlPigsClient.h"
 #include "TicketWidget.h"
 
 class MainWindow : public QMainWindow
@@ -34,7 +34,7 @@ private:
     QSystemTrayIcon * tray;
     QTranslator * appTranslator;
 
-    GenericPigsClient * pigser;
+    PigsClient * pigser;
     HostoperButton * hostoper;
     SettingsManager * settings;
 
@@ -71,13 +71,13 @@ private slots:
     void on_pigser_searchReady(const QList<TicketInfo> & tickets);
     void on_pigser_ticketReady(const Ticket & ticket);
     void on_pigser_domainInfoReady(const QString & info);
-    void on_pigser_error(QString error, PigsRequest req, int id);
+    void on_pigser_error(QString error, PigsClient::PigsRequest req, int id);
     void on_pigser_showMessage(QString mess);
 
     // Hostoper Event
     void on_hostoper_error(QString error);
 
-    // Settings Evet
+    // Settings Event
     void on_settings_settingsChanged();
 
     // Misc Events

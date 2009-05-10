@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     settings = new SettingsManager(this);
     settings->setObjectName("settings");
 
-    pigser = new PigsClient(this);
+    pigser = new HtmlPigsClient(this);
     pigser->setObjectName("pigser");
 
     hostoper = new HostoperButton(this);
@@ -328,17 +328,18 @@ void MainWindow::on_pigser_ticketReady(const Ticket & ticket)
 
 void MainWindow::on_pigser_domainInfoReady(const QString & info)
 {
+    ui.textBrowser_DomainInfo->setHtml(info);
     if (ui.dockWidget_DomainInfo->isHidden())
         ui.dockWidget_DomainInfo->show();
     ui.dockWidget_DomainInfo->setFocus();
 }
 
-void MainWindow::on_pigser_error(QString error, PigsRequest req, int id)
+void MainWindow::on_pigser_error(QString error, PigsClient::PigsRequest req, int id)
 {
     QMessageBox::information(this, tr("Pigser"), error);
     switch(req)
     {
-        case SearchTickets:
+        case PigsClient::SearchTickets:
             ui.actionSearchTickets->setEnabled(true);
             break;
         default:

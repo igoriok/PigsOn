@@ -9,19 +9,20 @@ SOURCES += main.cpp \
     TicketWidget.cpp \
     TicketInfo.cpp \
     Ticket.cpp \
-    PigsClient.cpp \
     HostoperButton.cpp \
     SettingsDialog.cpp \
-    SettingsManager.cpp
+    SettingsManager.cpp \
+    HtmlPigsClient.cpp
 HEADERS += mainwindow.h \
     TicketWidget.h \
     TicketInfo.h \
     Ticket.h \
     SAccount.h \
-    PigsClient.h \
     HostoperButton.h \
     SettingsDialog.h \
-    SettingsManager.h
+    SettingsManager.h \
+    HtmlPigsClient.h \
+    PigsClient.h
 FORMS += mainwindow.ui \
     TicketWidget.ui \
     SettingsDialog.ui \

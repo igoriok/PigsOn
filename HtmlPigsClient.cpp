@@ -1,4 +1,4 @@
-#include "PigsClient.h"
+#include "HtmlPigsClient.h"
 #include <QtCore/QRegExp>
 #include <QtCore/QLocale>
 #include <QtNetwork/QNetworkCookieJar>
@@ -7,7 +7,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QTextCodec>
 
-PigsClient::PigsClient(QObject * parent): GenericPigsClient(parent)
+HtmlPigsClient::HtmlPigsClient(QObject * parent): PigsClient(parent)
 {
     client = new QNetworkAccessManager(this);
     client->setObjectName("client");
@@ -16,7 +16,7 @@ PigsClient::PigsClient(QObject * parent): GenericPigsClient(parent)
     this->connect(client, SIGNAL(finished(QNetworkReply *)), this, SLOT(on_client_finished(QNetworkReply *)));
 }
 
-void PigsClient::setAccount(Account acc)
+void HtmlPigsClient::setAccount(Account acc)
 {
     account = acc;
 
@@ -45,7 +45,7 @@ void PigsClient::setAccount(Account acc)
     }
 }
 
-void PigsClient::refreshGlobals()
+void HtmlPigsClient::refreshGlobals()
 {
     emit showMessage(tr("Retrieve Globals..."));
     QNetworkRequest req(QUrl("https://support.24hourwebhostingsupport.com/showcases.php"));
@@ -54,7 +54,7 @@ void PigsClient::refreshGlobals()
     client->get(req);
 }
 
-void PigsClient::getGroupTickets(int groupID)
+void HtmlPigsClient::getGroupTickets(int groupID)
 {
     emit showMessage(tr("Retrieve %1 tickets...").arg(Ticket::Groups.value(groupID)));
     if (groupID < 0)
@@ -81,7 +81,7 @@ void PigsClient::getGroupTickets(int groupID)
     client->get(req);
 }
 
-void PigsClient::searchTickets(const QMap<QString, QString> & data)
+void HtmlPigsClient::searchTickets(const QMap<QString, QString> & data)
 {
     emit showMessage(tr("Searching..."));
     QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/cases.php?request=search")));
@@ -101,7 +101,7 @@ void PigsClient::searchTickets(const QMap<QString, QString> & data)
     client->post(req, postData);
 }
 
-void PigsClient::getTicket(int caseID)
+void HtmlPigsClient::getTicket(int caseID)
 {
     emit showMessage(tr("Retrieve ticket %1...").arg(caseID));
     if (caseID <= 0)
@@ -116,7 +116,7 @@ void PigsClient::getTicket(int caseID)
     client->get(req);
 }
 
-void PigsClient::getDomainInfo(const QString & domain)
+void HtmlPigsClient::getDomainInfo(const QString & domain)
 {
     emit showMessage(tr("Getting domain info %1...").arg(domain));
     if (domain.isEmpty())
@@ -135,11 +135,11 @@ void PigsClient::getDomainInfo(const QString & domain)
     client->post(req, postData);
 }
 
-void PigsClient::createTicket(const Ticket & ticket)
+void HtmlPigsClient::createTicket(const Ticket & ticket)
 {
 }
 
-void PigsClient::updateTicket(const Ticket & ticket)
+void HtmlPigsClient::updateTicket(const Ticket & ticket)
 {
     emit showMessage(tr("Updating ticket %1...").arg(ticket.CaseID));
         QByteArray data(prepareQuery(ticket));
@@ -158,7 +158,7 @@ void PigsClient::updateTicket(const Ticket & ticket)
     client->post(req, data);
 }
 
-Ticket PigsClient::parseTicket(const QString & data)
+Ticket HtmlPigsClient::parseTicket(const QString & data)
 {
     Ticket ticket;
     int pos = 0;
@@ -201,7 +201,7 @@ Ticket PigsClient::parseTicket(const QString & data)
     return ticket;
 }
 
-QString PigsClient::subString(QString start, QString end, int & pos, const QString & data)
+QString HtmlPigsClient::subString(QString start, QString end, int & pos, const QString & data)
 {
     int spos = data.indexOf(start, pos);
     if (spos != -1)
@@ -217,12 +217,12 @@ QString PigsClient::subString(QString start, QString end, int & pos, const QStri
     return QString();
 }
 
-QString PigsClient::fromHtml(const QString & data)
+QString HtmlPigsClient::fromHtml(const QString & data)
 {
     return QString(data).replace(QString("&lt;"), QString("<")).replace(QString("&gt;"), QString(">")).replace(QString("&amp;"), QString("&")).replace(QString("&apos;"), QString("'")).replace(QString("&quot;"), QString("\""));
 }
 
-void PigsClient::parseHostopians(const QString & data)
+void HtmlPigsClient::parseHostopians(const QString & data)
 {
     QRegExp reg("<select name=nchostopian>[\\s]*((?:<option value='[^']*'>[^<]*</option>)+)[\\s]*</select>");
     if (reg.indexIn(data) != -1)
@@ -242,7 +242,7 @@ void PigsClient::parseHostopians(const QString & data)
     }
 }
 
-void PigsClient::parseCategories(const QString & data)
+void HtmlPigsClient::parseCategories(const QString & data)
 {
     QRegExp reg("<select name=\"category1\"[^>]*>>[\\s]*((?:<OPTION value=\"[\\d]+\"(?: SELECTED)?>[^<]*</OPTION>)+);[\\s]*</select>");
     if (reg.indexIn(data) != -1)
@@ -260,7 +260,7 @@ void PigsClient::parseCategories(const QString & data)
     }
 }
 
-void PigsClient::parseSubCategories(const QString & data)
+void HtmlPigsClient::parseSubCategories(const QString & data)
 {
     QRegExp reg("function setOptions\\(chosen\\) \\{[\\w\\s\\.;=]*((?:if \\(chosen == [\"'][^'\"]*[\"']\\)[\\s]*\\{[\\s\\w\\d/]*(?:selbox\\.options\\[selbox\\.options\\.length\\] = new Option\\('[^']*','[^']*'\\);[\\s]*)+\\}[\\s]*)+)\\}");
     if (reg.indexIn(data) != -1)
@@ -296,7 +296,7 @@ void PigsClient::parseSubCategories(const QString & data)
     }
 }
 
-void PigsClient::parseGlobalTechs(const QString & data)
+void HtmlPigsClient::parseGlobalTechs(const QString & data)
 {
     QRegExp reg("function setOptions2\\(chosen\\)[\\s]*\\{[\\w\\s\\.;=]*if \\(chosen == \"\"\\)[\\s]*\\{[\\s]*(?:selbox\\.options\\[selbox\\.options\\.length\\] = new Option\\('[^']*','[^']*'\\);[\\s]*)+\\}[\\s]*if \\(chosen == '600'\\)[\\s]*\\{[\\s]*((?:selbox\\.options\\[selbox\\.options\\.length\\] = new Option\\('[^']*','[^']*'\\);[\\s]*)+)\\}[\\s]*else if \\( '405' == chosen\\)[\\s]*\\{[\\s]*((?:selbox\\.options\\[selbox\\.options\\.length\\] = new Option\\('[^']*','[^']*'\\);[\\s]*)+)\\}[\\s]*else[\\s]*\\{[\\s]*((?:selbox\\.options\\[selbox\\.options\\.length\\] = new Option\\('[^']*','[^']*'\\);[\\s]*)+)\\}[\\s]*\\}");
     if (reg.indexIn(data) != -1)
@@ -339,7 +339,7 @@ void PigsClient::parseGlobalTechs(const QString & data)
     }
 }
 
-void PigsClient::parseGroups(const QString & data)
+void HtmlPigsClient::parseGroups(const QString & data)
 {
     QRegExp reg("<select name=ncagroup[^>]*>[\\s]*((?:<option value=[\\d]+ >[^<]*</option>[\\s]*)+)</select>");
     if (reg.indexIn(data) != -1)
@@ -359,7 +359,7 @@ void PigsClient::parseGroups(const QString & data)
     }
 }
 
-QMap<QString, QString> PigsClient::parseSelect(const QString & data)
+QMap<QString, QString> HtmlPigsClient::parseSelect(const QString & data)
 {
     QMap<QString, QString> map;
     QRegExp reg("<option[\\s]+value=((?:[\"\'][^\"\']*[\"\'])|(?:[^\"\'\\s>]*))([\\s]*SELECTED)?[^>]*>([^<]*)</option>", Qt::CaseInsensitive);
@@ -376,7 +376,7 @@ QMap<QString, QString> PigsClient::parseSelect(const QString & data)
     return map;
 }
 
-QList<TicketInfo> PigsClient::parseTicketInfo(const QString & data)
+QList<TicketInfo> HtmlPigsClient::parseTicketInfo(const QString & data)
 {
     QRegExp one("<tr>\n<td[^>]*><a href=([^> ]*)>[^<]*</td>\n<td[^>]*>(\\d*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n<td[^>]*>(\\d*)&nbsp;</td>\n<td[^>]*>([^&]*)&nbsp;</td>\n</tr>");
     QList<TicketInfo> out;
@@ -400,7 +400,7 @@ QList<TicketInfo> PigsClient::parseTicketInfo(const QString & data)
     return out;
 }
 
-QByteArray PigsClient::prepareQuery(const Ticket & ticket)
+QByteArray HtmlPigsClient::prepareQuery(const Ticket & ticket)
 {
     QByteArray out;
 
@@ -439,17 +439,17 @@ QByteArray PigsClient::prepareQuery(const Ticket & ticket)
     return out;
 }
 
-QByteArray PigsClient::toPostText(const QString & text)
+QByteArray HtmlPigsClient::toPostText(const QString & text)
 {
     return QUrl::toPercentEncoding(text, " ").replace(' ', '+');
 }
 
-void PigsClient::on_client_sslErrors(QNetworkReply * reply)
+void HtmlPigsClient::on_client_sslErrors(QNetworkReply * reply)
 {
     reply->ignoreSslErrors();
 }
 
-void PigsClient::on_client_finished(QNetworkReply * reply)
+void HtmlPigsClient::on_client_finished(QNetworkReply * reply)
 {
     QNetworkRequest request(reply->request());
     PigsRequest req = (PigsRequest)(request.attribute((QNetworkRequest::Attribute)(QNetworkRequest::User + 1)).toInt());
