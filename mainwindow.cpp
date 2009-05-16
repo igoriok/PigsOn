@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     this->restoreState(settings->getOption("mwState").toByteArray());
 
     // Restore Pigs groups
-    QStringList gr(settings->getOption("pGroups").toString().split(QChar(',')));
+    QStringList gr(settings->getOption("pGroups").toString().split(QChar(','), QString::SkipEmptyParts));
     for (int i = 0; i < gr.size(); ++i)
     {
         QTreeWidgetItem * root = new QTreeWidgetItem(ui.treeWidget, QStringList(QString("Unknown [%1]").arg(gr.at(i))));
@@ -387,6 +387,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 
 void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint & pos)
 {
+    // Bug with QTreeWidget Header
     QPoint pt(ui.treeWidget->mapToGlobal(pos));
     if (!ui.treeWidget->isHeaderHidden())
         pt += QPoint(0, ui.treeWidget->header()->height());
@@ -438,29 +439,30 @@ void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint & pos)
     QAction * result = menu.exec(pt);
 
     if (result != NULL) {
-        if (result->parentWidget() == addGroup) {
+        if (result->parentWidget() == addGroup) { // If user wants to add new group
             int grID = result->data().toInt();
             QTreeWidgetItem * root = new QTreeWidgetItem(QStringList(Ticket::Groups.value(grID, tr("Unknown [%1]").arg(grID))));
+            root->setDisabled(true);
             root->setData(0, Qt::UserRole, QVariant(false));
             root->setData(0, Qt::UserRole + 1, QVariant(grID));
             ui.treeWidget->addTopLevelItem(root);
             pigser->getGroupTickets(grID);
         }
-        else if (result == removeGroup) {
+        else if (result == removeGroup) { // If user wants to remove group
             ui.treeWidget->invisibleRootItem()->removeChild(item);
         }
-        else if (result == reloadGroup) {
+        else if (result == reloadGroup) { // If user wants to reload group
             item->setDisabled(true);
             pigser->getGroupTickets(item->data(0, Qt::UserRole + 1).toInt());
         }
-        else if (result == editTicket) {
+        else if (result == editTicket) { // If user wants to open ticket
             openTicketWidget(item->data(0, Qt::UserRole + 1).toInt());
         }
-        else if (result == markRead) {
+        else if (result == markRead) { // If user wants to mark ticket as Read
             for (int k = 0; k < item->columnCount(); ++k)
                 item->setBackgroundColor(k, QColor(255, 255, 255));
         }
-        else if (result == markAllRead) {
+        else if (result == markAllRead) { // If user wants to select all group tickets as Read
             ui.treeWidget->setSortingEnabled(false);
             for (int i = 0; i < item->childCount(); ++i) {
                 if (item->child(i)->backgroundColor(0) == QColor(0, 255, 0))
@@ -611,9 +613,7 @@ void MainWindow::on_actionCloseTicket_triggered()
 {
     int tabI = ui.tabWidget->currentIndex();
     if (tabI != -1)
-    {
         ui.tabWidget->removeTab(tabI);
-    }
 
     if (findTicketWidget(0) == NULL)
         ui.actionNewTicket->setEnabled(true);

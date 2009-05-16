@@ -10,30 +10,28 @@
 class TicketInfo
 {
 public:
-    TicketInfo();
     TicketInfo(
-            QUrl url,
-            QString caseID,
-            QString category,
-            QString hostopian,
-            QString name,
-            QString domain,
-            QString status,
+            const QUrl & url,
+            const QString & caseID,
+            const QString & category,
+            const QString & hostopian,
+            const QString & name,
+            const QString & domain,
+            const QString & status,
             int priority,
-            QString opened
+            const QString & opened
     );
     // Getters
-    QUrl getUrl() const {return m_Url;}
-    QString getCaseID() const {return m_CaseID;}
-    QString getCategory() const {return m_Category;}
-    QString getHostopian() const {return m_Hostopian;}
-    QString getName() const {return m_Name;}
-    QString getDomain() const {return m_Domain;}
-    QString getStatus() const {return m_Status;}
+    const QUrl & getUrl() const {return m_Url;}
+    const QString & getCaseID() const {return m_CaseID;}
+    const QString & getCategory() const {return m_Category;}
+    const QString & getHostopian() const {return m_Hostopian;}
+    const QString & getName() const {return m_Name;}
+    const QString & getDomain() const {return m_Domain;}
+    const QString & getStatus() const {return m_Status;}
     int getPriority() const {return m_Priority;}
-    QString getOpened() const {return m_Opened;}
+    const QString & getOpened() const {return m_Opened;}
 
-public:
     QString toString() const;
 
 private:

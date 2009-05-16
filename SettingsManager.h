@@ -13,6 +13,13 @@ public:
     SettingsManager(QObject * parent = 0);
     ~SettingsManager();
 
+    // Options interface
+    QVariant getOption(const QString & name) const;
+    void setOption(const QString & name, const QVariant & value);
+
+private:
+    QMap<QString, QVariant> _settings;
+
 public slots:
     void loadConfig();
     void saveConfig();
@@ -20,13 +27,6 @@ public slots:
 
 signals:
     void settingsChanged();
-
-public:
-    QVariant getOption(const QString & name) const;
-    void setOption(const QString & name, const QVariant & value);
-
-private:
-    QMap<QString, QVariant> _settings;
 };
 
 #endif // SETTINGSMANAGER_H

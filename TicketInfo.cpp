@@ -2,20 +2,16 @@
 #include <QtCore/QRegExp>
 #include <QtCore/QLocale>
 
-TicketInfo::TicketInfo()
-{
-}
-
 TicketInfo::TicketInfo(
-            QUrl url,
-            QString caseID,
-            QString category,
-            QString hostopian,
-            QString name,
-            QString domain,
-            QString status,
+            const QUrl & url,
+            const QString & caseID,
+            const QString & category,
+            const QString & hostopian,
+            const QString & name,
+            const QString & domain,
+            const QString & status,
             int priority,
-            QString opened
+            const QString & opened
 ) :
         m_Url(url),
         m_CaseID(caseID),

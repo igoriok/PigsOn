@@ -21,6 +21,10 @@ public:
     void updateContent(const Ticket & ticket);
     int getID() { return ticket.CaseID; }
 
+signals:
+    void updateTicket(Ticket & ticket);
+    void getDomainInfo(const QString & domain);
+
 private:
     Ui::TicketWidget *m_ui;
     Ticket ticket;
@@ -34,10 +38,6 @@ private slots:
 
 protected:
     virtual void changeEvent(QEvent *e);
-
-signals:
-    void updateTicket(Ticket & ticket);
-    void getDomainInfo(const QString & domain);
 };
 
 #endif // TICKETWIDGET_H

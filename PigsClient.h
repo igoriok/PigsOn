@@ -11,6 +11,7 @@
 class PigsClient : public QObject
 {
     Q_OBJECT
+
 public:
     PigsClient(QObject * parent) : QObject(parent), debug(false) {}
     virtual ~PigsClient() {}
