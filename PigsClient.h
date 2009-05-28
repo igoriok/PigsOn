@@ -46,7 +46,7 @@ signals:
     void searchReady(const QList<TicketInfo> & tickets);
     void ticketReady(const Ticket & ticket);
     void domainInfoReady(const QString & info);
-    void error(QString error, PigsRequest req, int id);
+    void error(QString error, PigsClient::PigsRequest req, int id);
     void showMessage(QString mess);
 };
 

@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     this->connect(pigser, SIGNAL(ticketReady(Ticket)), SLOT(clearStatusBar()));
     this->connect(pigser, SIGNAL(domainInfoReady(QString)), SLOT(clearStatusBar()));
     this->connect(pigser, SIGNAL(searchReady(QList<TicketInfo>)), SLOT(clearStatusBar()));
-    this->connect(pigser, SIGNAL(error(QString,PigsRequest,int)), SLOT(clearStatusBar()));
+    this->connect(pigser, SIGNAL(error(QString,PigsClient::PigsRequest,int)), SLOT(clearStatusBar()));
 
     // Add View menu actions
     ui.menuToolBar->addAction(ui.mainToolBar->toggleViewAction());
