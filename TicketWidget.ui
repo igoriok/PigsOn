@@ -11,6 +11,12 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>6</number>
+   </property>
+   <property name="spacing">
+    <number>4</number>
+   </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="sizePolicy">
@@ -310,6 +316,56 @@
      </layout>
     </widget>
    </item>
+   <item row="2" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="pushButton_Reset">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 200, 180, 255))
+</string>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_Update">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 222, 0, 255), stop:1 rgba(195, 220, 195, 255))</string>
+       </property>
+       <property name="text">
+        <string>Update</string>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="0" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="sizePolicy">
@@ -372,92 +428,112 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_4">
-      <attribute name="title">
-       <string>Audit Trail</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QPlainTextEdit" name="plainTextEdit_AuditTrail"/>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QTextEdit" name="textEdit_History">
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBox_AuditTrail">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>1</verstretch>
       </sizepolicy>
      </property>
-     <property name="undoRedoEnabled">
+     <property name="title">
+      <string>Audit Trail</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="flat">
       <bool>false</bool>
      </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-     <property name="acceptRichText">
-      <bool>false</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPlainTextEdit" name="plainTextEdit_AuditTrail"/>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QPushButton" name="pushButton_Reset">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 200, 180, 255))
-</string>
-       </property>
-       <property name="text">
-        <string>Reset</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_Update">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string>background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 222, 0, 255), stop:1 rgba(195, 220, 195, 255))</string>
-       </property>
-       <property name="text">
-        <string>Update</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_History">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>History</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTextEdit" name="textEdit_History">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="acceptRichText">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_CaseID</tabstop>
+  <tabstop>lineEdit_DateOpened</tabstop>
+  <tabstop>lineEdit_DateClosed</tabstop>
+  <tabstop>comboBox_Hostopian</tabstop>
+  <tabstop>comboBox_Category</tabstop>
+  <tabstop>lineEdit_Domain</tabstop>
+  <tabstop>toolButton</tabstop>
+  <tabstop>comboBox_SubCategory</tabstop>
+  <tabstop>lineEdit_CustName</tabstop>
+  <tabstop>comboBox_Priority</tabstop>
+  <tabstop>lineEdit_Email</tabstop>
+  <tabstop>comboBox_Status</tabstop>
+  <tabstop>lineEdit_OpenedBy</tabstop>
+  <tabstop>comboBox_Group</tabstop>
+  <tabstop>lineEdit_ClosedBy</tabstop>
+  <tabstop>comboBox_Person</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>plainTextEdit_Problem</tabstop>
+  <tabstop>plainTextEdit_Notes</tabstop>
+  <tabstop>plainTextEdit_Resolution</tabstop>
+  <tabstop>textEdit_History</tabstop>
+  <tabstop>plainTextEdit_AuditTrail</tabstop>
+  <tabstop>pushButton_Reset</tabstop>
+  <tabstop>pushButton_Update</tabstop>
+ </tabstops>
  <resources>
   <include location="Resources.qrc"/>
  </resources>

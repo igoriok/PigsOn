@@ -98,56 +98,59 @@ void HostoperButton::submit() {
 void HostoperButton::on_client_finished(QNetworkReply * reply)
 {
     if(reply->error() != QNetworkReply::NoError)
-        error(reply->errorString());
+    {
+        emit error(reply->errorString());
+    }
     else {
-        switch((RequestType)reply->request().attribute(QNetworkRequest::User).toInt()) {
+        switch((RequestType)reply->request().attribute(QNetworkRequest::User).toInt())
+        {
+            case LogIn:
+                if(!reply->rawHeader("Location").contains("error.php"))
+                    get(TimeBoardIndex, QNetworkRequest(tbIndex));
+                else
+                    emit error(tr("Login or password not accepted!"));
+                break;
 
-        case LogIn:
-            if(!reply->rawHeader("Location").contains("error.php"))
-                get(TimeBoardIndex, QNetworkRequest(tbIndex));
-            else
-                emit error(tr("Login or password not accepted!"));
-            break;
+            case TimeBoardIndex:
+                get(TimeBoardWorkboard, QNetworkRequest(tbWorkboard));
+                break;
 
-        case TimeBoardIndex:
-            get(TimeBoardWorkboard, QNetworkRequest(tbWorkboard));
-            break;
+            case TimeBoardWorkboard:
+                currTime = QLocale(QLocale::C).toDateTime(QString(reply->rawHeader("Date")), "ddd, dd MMM yyyy hh:mm:ss 'GMT'").time();
+                if (currTime.isValid())
+                    currTime = currTime.addSecs(7200);
 
-        case TimeBoardWorkboard:
-            currTime = QLocale(QLocale::C).toDateTime(QString(reply->rawHeader("Date")), "ddd, dd MMM yyyy hh:mm:ss 'GMT'").time();
-            if (currTime.isValid())
-                currTime = currTime.addSecs(7200);
+                if (!parseHTML(reply->readAll()))
+                    emit error(tr("Web page was modified. Can't find correct data!"));
 
-            if (!parseHTML(reply->readAll()))
-                emit error(tr("Web page was modified. Can't find correct data!"));
+                if(doSubmit)
+                    submit();
+                else
+                    get(LogOut, QNetworkRequest(tbLogout));
+                break;
 
-            if(doSubmit)
-                submit();
-            else
-                get(LogOut, QNetworkRequest(tbLogout));
-            break;
-
-        case LogOut:
-            {
-                QString txt;
-                if(startTime.isValid()) {
-                    txt.append(QString("%1").arg(startTime.toString("hh:mm")));
-                    if(endTime.isValid())
-                        txt.append(QString("-%1").arg(endTime.toString("hh:mm")));
-                    else
-                        txt.append("-...");
-                } else
-                    txt.append("...");
-                this->setText(txt);
-                this->setEnabled(true);
-                isBusy = false;
-            }
-            break;
-        default:
-            emit error(tr("Unknown request"));
-            break;
+            case LogOut:
+                {
+                    QString txt;
+                    if(startTime.isValid()) {
+                        txt.append(QString("%1").arg(startTime.toString("hh:mm")));
+                        if(endTime.isValid())
+                            txt.append(QString("-%1").arg(endTime.toString("hh:mm")));
+                        else
+                            txt.append("-...");
+                    } else
+                        txt.append("...");
+                    this->setText(txt);
+                    this->setEnabled(true);
+                    isBusy = false;
+                }
+                break;
+            default:
+                emit error(tr("Unknown request"));
+                break;
         }
     }
+    reply->deleteLater();
 }
 
 bool HostoperButton::parseHTML(const QString &cont)

@@ -493,7 +493,7 @@ void HtmlPigsClient::on_client_finished(QNetworkReply * reply)
                 case GetDomainInfo:
                     {
                         int pos = 0;
-                        emit domainInfoReady(subString(QString("<font color=red>(**domain name must match exactly)</font><br><br>"), QString("</center>"), pos, cont));
+                        emit domainInfoReady(subString(QString("<font color=red>(**domain name must match exactly)</font><br><br>"), QString("</center>"), pos, cont).trimmed());
                     }
                     break;
                 case CreateTicket:
@@ -506,4 +506,5 @@ void HtmlPigsClient::on_client_finished(QNetworkReply * reply)
                     break;
             }
     }
+    reply->deleteLater();
 }

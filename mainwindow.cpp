@@ -57,6 +57,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     tMenu->addAction(ui.actionQuit);
     tray->setContextMenu(tMenu);
 
+    // Set sorting
+    ui.treeWidget->sortItems(0, Qt::AscendingOrder);
+
     // Show Hostoper button
     ui.statusBar->addPermanentWidget(hostoper);
 
