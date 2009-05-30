@@ -142,7 +142,8 @@ QTreeWidgetItem * MainWindow::findGroupItem(int id)
 
 void MainWindow::on_lineEdit_returnPressed()
 {
-    int id = ui.lineEdit->text().toInt();
+    QString text(ui.lineEdit->text().trimmed());
+    int id = text.toInt();
     if (id > 0)
     {
         TicketWidget * tw = findTicketWidget(id);
@@ -154,7 +155,7 @@ void MainWindow::on_lineEdit_returnPressed()
         else
             ui.tabWidget->setCurrentWidget(tw);
     } else {
-        pigser->getDomainInfo(ui.lineEdit->text());
+        pigser->getDomainInfo(text);
     }
 }
 
