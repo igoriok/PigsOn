@@ -652,7 +652,7 @@ void MainWindow::on_tray_activated(QSystemTrayIcon::ActivationReason reason)
                 this->hide();
             } else this->activateWindow();
         } else {
-            this->show();
+            this->showNormal();
         }
         break;
     case QSystemTrayIcon::MiddleClick:

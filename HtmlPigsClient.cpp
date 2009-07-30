@@ -461,7 +461,7 @@ void HtmlPigsClient::on_client_finished(QNetworkReply * reply)
     }
     else
     {
-        QString cont(QTextCodec::codecForName("Windows-1252")->toUnicode(reply->readAll()));
+        QString cont(QTextCodec::codecForName("Windows-1251")->toUnicode(reply->readAll()));
         if(cont.indexOf(QString("<br><h2>Access denied. Please log in again.</h2>")) == 0) // if login not accepted
             emit error(tr("Login or password not accepted!"), req, id);
         else
