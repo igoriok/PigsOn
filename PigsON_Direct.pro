@@ -1,7 +1,8 @@
 # -------------------------------------------------
 # Project created by QtCreator 2009-02-21T14:12:35
 # -------------------------------------------------
-QT += network
+QT += network \
+    webkit
 TARGET = PigsON_Direct
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -12,7 +13,9 @@ SOURCES += main.cpp \
     HostoperButton.cpp \
     SettingsDialog.cpp \
     SettingsManager.cpp \
-    HtmlPigsClient.cpp
+    HtmlPigsClient.cpp \
+    WebKitPigsClient.cpp \
+    WebKitPigsParser.cpp
 HEADERS += mainwindow.h \
     TicketWidget.h \
     TicketInfo.h \
@@ -22,7 +25,9 @@ HEADERS += mainwindow.h \
     SettingsDialog.h \
     SettingsManager.h \
     HtmlPigsClient.h \
-    PigsClient.h
+    PigsClient.h \
+    WebKitPigsClient.h \
+    WebKitPigsParser.h
 FORMS += mainwindow.ui \
     TicketWidget.ui \
     SettingsDialog.ui \

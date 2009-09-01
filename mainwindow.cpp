@@ -3,6 +3,7 @@
 #include <QtGui/QMessageBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLineEdit>
+#include "WebKitPigsClient.h"
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -17,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     settings = new SettingsManager(this);
     settings->setObjectName("settings");
 
-    pigser = new HtmlPigsClient(this);
+    //pigser = new HtmlPigsClient(this);
+    pigser = new WebKitPigsClient(this);
     pigser->setObjectName("pigser");
 
     hostoper = new HostoperButton(this);
