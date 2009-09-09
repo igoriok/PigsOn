@@ -14,6 +14,8 @@ WebKitPigsClient::WebKitPigsClient(QObject * parent): PigsClient(parent)
 {
     page = new QWebPage(this);
     page->setForwardUnsupportedContent(true);
+    page->settings()->setAttribute(QWebSettings::AutoLoadImages, false);
+    page->settings()->setAttribute(QWebSettings::PrintElementBackgrounds, false);
 
     this->connect(page->networkAccessManager(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)), SLOT(on_page_manager_sslErrors(QNetworkReply *)));
     this->connect(page, SIGNAL(unsupportedContent(QNetworkReply*)), SLOT(on_page_unsupportedContent(QNetworkReply*)));
@@ -35,7 +37,7 @@ void WebKitPigsClient::setAccount(Account acc)
         cookies.append(QNetworkCookie("pigstatus", data));
         page->networkAccessManager()->cookieJar()->setCookiesFromUrl(cookies, QUrl("https://support.24hourwebhostingsupport.com/"));
 
-        refreshGlobals();
+        //refreshGlobals();
     }
     else
     {
@@ -97,7 +99,8 @@ void WebKitPigsClient::nextQueryItem()
 
 void WebKitPigsClient::refreshGlobals()
 {
-    addToQuery(QueryRequest(RefreshGlobals, QNetworkRequest(QUrl("https://support.24hourwebhostingsupport.com/showcases.php"))));
+    addToQuery(QueryRequest(RefreshGlobals, 0,
+                            QNetworkRequest(QUrl("https://support.24hourwebhostingsupport.com/showcases.php"))));
 }
 
 void WebKitPigsClient::getGroupTickets(int groupID)
@@ -120,12 +123,11 @@ void WebKitPigsClient::getGroupTickets(int groupID)
         query.append(QPair<QString, QString>("cookiesql", QString("select+*+from+CASES+where+agroup=%1+and+atech='group'+and+status+in+('in_progress','open')+order+by+priority").arg(groupID)));
     url.setQueryItems(query);
 
-    addToQuery(QueryRequest(GetGroupTickets, QNetworkRequest(url), QNetworkAccessManager::GetOperation, QByteArray(), groupID));
+    addToQuery(QueryRequest(GetGroupTickets, groupID, QNetworkRequest(url)));
 }
 
 void WebKitPigsClient::searchTickets(const QMap<QString, QString> & data)
 {
-    QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/cases.php?request=search")));
     QByteArray postData;
 
     for (QMap<QString, QString>::const_iterator iter = data.constBegin(); iter != data.constEnd(); ++iter)
@@ -136,7 +138,11 @@ void WebKitPigsClient::searchTickets(const QMap<QString, QString> & data)
         postData.append("statussearch=open&");
     postData.append("request=search&findit=set&submit=search");
 
-    addToQuery(QueryRequest(SearchTickets, req, QNetworkAccessManager::PostOperation, postData));
+    addToQuery(QueryRequest(SearchTickets, 0,
+                            QNetworkRequest(QUrl(
+                                    QString("https://support.24hourwebhostingsupport.com/cases.php?request=search"))),
+                            QNetworkAccessManager::PostOperation,
+                            postData));
 }
 
 void WebKitPigsClient::getTicket(int caseID)
@@ -147,9 +153,12 @@ void WebKitPigsClient::getTicket(int caseID)
         return;
     }
 
-    QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/showcases.php?showme=%1").arg(caseID)));
-
-    addToQuery(QueryRequest(GetTicket, req, QNetworkAccessManager::GetOperation, QByteArray(), caseID));
+    addToQuery(QueryRequest(GetTicket,
+                            caseID,
+                            QNetworkRequest(QUrl(
+                                    QString("https://support.24hourwebhostingsupport.com/showcases.php?showme=%1")
+                                    .arg(caseID)))
+                            ));
 }
 
 void WebKitPigsClient::getDomainInfo(const QString & domain)
@@ -160,11 +169,14 @@ void WebKitPigsClient::getDomainInfo(const QString & domain)
         return;
     }
 
-    QNetworkRequest req(QUrl(QString("https://support.24hourwebhostingsupport.com/cases.php?request=fhostopian")));
     QByteArray postData("thisdomain=");
     postData.append(WebKitPigsParser::toPostText(domain));
 
-    addToQuery(QueryRequest(GetDomainInfo, req, QNetworkAccessManager::PostOperation, postData));
+    addToQuery(QueryRequest(GetDomainInfo, 0,
+                            QNetworkRequest(QUrl(
+                                    QString("https://support.24hourwebhostingsupport.com/cases.php?request=fhostopian"))),
+                            QNetworkAccessManager::PostOperation,
+                            postData));
 }
 
 void WebKitPigsClient::createTicket(const Ticket & ticket)
@@ -184,7 +196,10 @@ void WebKitPigsClient::updateTicket(const Ticket & ticket)
         }
     }
 
-    addToQuery(QueryRequest(UpdateTicket, QNetworkRequest(QUrl(QString("https://support.24hourwebhostingsupport.com/showcases.php"))), QNetworkAccessManager::PostOperation, data));
+    addToQuery(QueryRequest(UpdateTicket, ticket.CaseID,
+                            QNetworkRequest(QUrl(QString("https://support.24hourwebhostingsupport.com/showcases.php"))),
+                            QNetworkAccessManager::PostOperation,
+                            data));
 }
 
 void WebKitPigsClient::on_page_manager_sslErrors(QNetworkReply * reply)
@@ -214,6 +229,8 @@ void WebKitPigsClient::on_page_loadFinished(bool b)
                     WebKitPigsParser::parseHostopians(page->mainFrame());
                     WebKitPigsParser::parseCategories(page->mainFrame());
                     WebKitPigsParser::parseSubCategories(page->mainFrame());
+                    WebKitPigsParser::parsePriorities(page->mainFrame());
+                    WebKitPigsParser::parseStatuses(page->mainFrame());
                     WebKitPigsParser::parseGlobalTechs(page->mainFrame());
                     WebKitPigsParser::parseGroups(page->mainFrame());
                     emit globalsReady();

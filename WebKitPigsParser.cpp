@@ -8,7 +8,8 @@ bool WebKitPigsParser::isAccessDeny(QWebFrame * frame)
 Ticket WebKitPigsParser::parseTicket(QWebFrame * frame)
 {
     Ticket ticket;
-    ticket.CaseID = frame->evaluateJavaScript("document.forms[0].children[0].children[0].children[0].children[1].childNodes[2].textContent").toString().trimmed().toInt();
+    //ticket.CaseID = frame->evaluateJavaScript("document.forms[0].children[0].children[0].children[0].children[1].childNodes[2].textContent").toString().trimmed().toInt();
+    ticket.CaseID = frame->evaluateJavaScript("document.forms[0].showme.value").toString().trimmed().toInt();
     if (ticket.CaseID > 0)
     {
         ticket.DateOpened = frame->evaluateJavaScript("document.forms[0].children[0].children[0].children[1].children[0].childNodes[2].textContent").toString().trimmed();
@@ -102,6 +103,28 @@ void WebKitPigsParser::parseSubCategories(QWebFrame * frame)
             }
             pos1 += reg1.matchedLength();
         }
+    }
+}
+
+void WebKitPigsParser::parsePriorities(QWebFrame * frame)
+{
+    QMap<QString, QString> select(parseSelect(frame, "document.forms[0].ncpriority"));
+
+    Ticket::Priorities.clear();
+    for (QMap<QString, QString>::const_iterator iter = select.constBegin(); iter != select.constEnd(); iter++)
+    {
+        Ticket::Priorities.append(iter.key().toInt());
+    }
+}
+
+void WebKitPigsParser::parseStatuses(QWebFrame * frame)
+{
+    QMap<QString, QString> select(parseSelect(frame, "document.forms[0].ncstatus"));
+
+    Ticket::Statuses.clear();
+    for (QMap<QString, QString>::const_iterator iter = select.constBegin(); iter != select.constEnd(); iter++)
+    {
+        Ticket::Statuses.insert(iter.key(), iter.value());
     }
 }
 
@@ -218,7 +241,7 @@ QList<TicketInfo> WebKitPigsParser::parseTicketInfo(QWebFrame * frame, PigsClien
 
 QString WebKitPigsParser::parseDomainInfo(QWebFrame * frame)
 {
-    return frame->evaluateJavaScript("document.body.children[5].children[1].children[7].innerHTML").toString().trimmed();
+    return QString("<table border=\"1\">\n%1\n</table>").arg(frame->evaluateJavaScript("document.forms[0].children[1].children[7].innerHTML").toString().trimmed());
 }
 
 QByteArray WebKitPigsParser::prepareQuery(const Ticket & ticket)

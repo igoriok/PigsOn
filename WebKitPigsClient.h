@@ -3,11 +3,11 @@
 
 #include <QtNetwork/QNetworkReply>
 #include <QWebPage>
+#include <QQueue>
 #include "PigsClient.h"
 #include "SAccount.h"
 #include "Ticket.h"
 #include "TicketInfo.h"
-#include <QQueue>
 
 // HTML Pigs client
 class WebKitPigsClient : public PigsClient
@@ -32,22 +32,23 @@ private:
     struct QueryRequest
     {
         QueryRequest(PigsRequest requestType,
+                     int requestId,
                      const QNetworkRequest & request,
                      QNetworkAccessManager::Operation operation = QNetworkAccessManager::GetOperation,
-                     const QByteArray & data = QByteArray(),
-                     int requestId = 0)
+                     const QByteArray & data = QByteArray())
         {
             this->request = request;
+            this->requestId = requestId;
             this->operation = operation;
             this->requestType = requestType;
             this->data = data;
-            this->requestId = requestId;
         }
+
         PigsRequest requestType;
+        int requestId;
         QNetworkRequest request;
         QNetworkAccessManager::Operation operation;
         QByteArray data;
-        int requestId;
     };
 
     QWebPage * page;

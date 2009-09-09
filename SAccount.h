@@ -5,17 +5,25 @@
 
 struct Account {
     Account() {}
-    Account(const QString &user, const QString &pass) {
+    Account(const QString &user, const QString &pass)
+    {
         this->user = user;
         this->pass = pass;
     }
+
     QString user;
     QString pass;
-    bool isValid() const {
-        if (user.isEmpty() || pass.isEmpty()) return false;
-        else return true;
+
+    bool isValid() const
+    {
+        if (user.isEmpty() || pass.isEmpty())
+            return false;
+        else
+            return true;
     }
-    void clear() {
+
+    void clear()
+    {
         user.clear();
         pass.clear();
     }

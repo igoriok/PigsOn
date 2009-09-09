@@ -183,7 +183,7 @@ void MainWindow::getDomainInfo(const QString & domain)
 void MainWindow::on_pigser_globalsReady()
 {
     QTreeWidgetItem * root = ui.treeWidget->invisibleRootItem();
-    for (int i = 0; i < root->childCount(); ++i)
+    for (int i = 0; i < root->childCount(); i++)
     {
         QTreeWidgetItem * item = root->child(i);
         int id = item->data(0, Qt::UserRole + 1).toInt();
@@ -230,30 +230,30 @@ void MainWindow::on_pigser_groupTicketsReady(int id, const QList<TicketInfo> & t
 
         for (int i = 0; i < tickets.size(); i++) {
             const TicketInfo & tk = tickets.at(i);
-            int caseID = tk.getCaseID().toInt();
+            int caseID = tk.caseID().toInt();
             if (caseID > 0)
             {
-                QTreeWidgetItem * item = new QTreeWidgetItem(root, QStringList(tk.getCaseID())<<tk.getCategory()<<tk.getHostopian()<<tk.getName()<<tk.getDomain()<<tk.getStatus()<<QString::number(tk.getPriority())<<tk.getOpened());
+                QTreeWidgetItem * item = new QTreeWidgetItem(root, QStringList(tk.caseID())<<tk.category()<<tk.hostopian()<<tk.name()<<tk.domain()<<tk.status()<<QString::number(tk.priority())<<tk.opened());
 
                 item->setData(0, Qt::UserRole, QVariant(true));
                 item->setData(0, Qt::UserRole + 1, QVariant(caseID));
 
                 QString tt;
-                tt.append(QString("CaseID:\t %1\n").arg(tk.getCaseID()));
-                tt.append(QString("Category:\t %1\n").arg(tk.getCategory()));
-                tt.append(QString("Hostopian:\t %1\n").arg(tk.getHostopian()));
-                tt.append(QString("Name:\t %1\n").arg(tk.getName()));
-                tt.append(QString("Domain:\t %1\n").arg(tk.getDomain()));
-                tt.append(QString("Status:\t %1\n").arg(tk.getStatus()));
-                tt.append(QString("Priority:\t %1\n").arg(tk.getPriority()));
-                tt.append(QString("Opened:\t %1\n").arg(tk.getOpened()));
+                tt.append(QString("CaseID:\t %1\n").arg(tk.caseID()));
+                tt.append(QString("Category:\t %1\n").arg(tk.category()));
+                tt.append(QString("Hostopian:\t %1\n").arg(tk.hostopian()));
+                tt.append(QString("Name:\t %1\n").arg(tk.name()));
+                tt.append(QString("Domain:\t %1\n").arg(tk.domain()));
+                tt.append(QString("Status:\t %1\n").arg(tk.status()));
+                tt.append(QString("Priority:\t %1\n").arg(tk.priority()));
+                tt.append(QString("Opened:\t %1\n").arg(tk.opened()));
 
                 item->setToolTip(0, tt);
 
                 int j;
                 for (j = 0; j < prev.size(); j++)
                     if (caseID == prev.at(j)) break;
-                if (tk.getStatus() == QString("in_progress"))
+                if (tk.status() == QString("in_progress"))
                     for (int k = 0; k < item->columnCount(); ++k)
                         item->setBackgroundColor(k, QColor(255, 255, 0));
                 else if (j == prev.size())
@@ -294,13 +294,13 @@ void MainWindow::on_pigser_searchReady(const QList<TicketInfo> & tickets)
     for (int i = 0; i < tickets.size(); ++i)
     {
         const TicketInfo & ticket = tickets.at(i);
-        ui.tableWidget->setItem(i, 0, new QTableWidgetItem(ticket.getCaseID()));
-        ui.tableWidget->setItem(i, 1, new QTableWidgetItem(ticket.getCategory()));
-        ui.tableWidget->setItem(i, 2, new QTableWidgetItem(ticket.getHostopian()));
-        ui.tableWidget->setItem(i, 3, new QTableWidgetItem(ticket.getName()));
-        ui.tableWidget->setItem(i, 4, new QTableWidgetItem(ticket.getDomain()));
-        ui.tableWidget->setItem(i, 5, new QTableWidgetItem(ticket.getStatus()));
-        ui.tableWidget->setItem(i, 6, new QTableWidgetItem(QString::number(ticket.getPriority())));
+        ui.tableWidget->setItem(i, 0, new QTableWidgetItem(ticket.caseID()));
+        ui.tableWidget->setItem(i, 1, new QTableWidgetItem(ticket.category()));
+        ui.tableWidget->setItem(i, 2, new QTableWidgetItem(ticket.hostopian()));
+        ui.tableWidget->setItem(i, 3, new QTableWidgetItem(ticket.name()));
+        ui.tableWidget->setItem(i, 4, new QTableWidgetItem(ticket.domain()));
+        ui.tableWidget->setItem(i, 5, new QTableWidgetItem(ticket.status()));
+        ui.tableWidget->setItem(i, 6, new QTableWidgetItem(QString::number(ticket.priority())));
     }
     ui.tableWidget->resizeColumnsToContents();
     ui.tableWidget->setEnabled(true);
@@ -340,7 +340,7 @@ void MainWindow::on_pigser_domainInfoReady(const QString & info)
     ui.dockWidget_DomainInfo->setFocus();
 }
 
-void MainWindow::on_pigser_error(QString error, PigsClient::PigsRequest req, int id)
+void MainWindow::on_pigser_error(QString error, PigsClient::PigsRequest req, int)
 {
     QMessageBox::information(this, tr("Pigser"), error);
     switch(req)
@@ -682,19 +682,6 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
-MainWindow::~MainWindow()
-{
-    settings->setOption("mwState", this->saveState());
-    if (ui.actionRussian->isChecked())
-        settings->setOption("iLang", QString("RU"));
-    QStringList gr;
-    QTreeWidgetItem * root = ui.treeWidget->invisibleRootItem();
-    for (int i = 0; i < root->childCount(); ++i)
-        gr.append(QString::number(root->child(i)->data(0, Qt::UserRole + 1).toInt()));
-    settings->setOption("pGroups", gr.join(","));
-    settings->saveConfig();
-}
-
 void MainWindow::on_actionSettings_triggered()
 {
     settings->showDialog();
@@ -730,4 +717,17 @@ void MainWindow::on_actionRussian_toggled(bool checked)
 
 void MainWindow::on_dockWidget_Cases_dockLocationChanged(Qt::DockWidgetArea area)
 {
+}
+
+MainWindow::~MainWindow()
+{
+    settings->setOption("mwState", this->saveState());
+    if (ui.actionRussian->isChecked())
+        settings->setOption("iLang", QString("RU"));
+    QStringList gr;
+    QTreeWidgetItem * root = ui.treeWidget->invisibleRootItem();
+    for (int i = 0; i < root->childCount(); ++i)
+        gr.append(QString::number(root->child(i)->data(0, Qt::UserRole + 1).toInt()));
+    settings->setOption("pGroups", gr.join(","));
+    settings->saveConfig();
 }

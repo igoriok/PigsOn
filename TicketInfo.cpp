@@ -25,7 +25,3 @@ TicketInfo::TicketInfo(
 {
 }
 
-QString TicketInfo::toString() const
-{
-    return m_CaseID;
-}

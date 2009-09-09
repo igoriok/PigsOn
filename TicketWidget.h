@@ -29,6 +29,8 @@ private:
     Ui::TicketWidget *m_ui;
     Ticket ticket;
 
+    void initLists();
+
 private slots:
     void on_toolButton_clicked();
     void on_pushButton_Reset_clicked();

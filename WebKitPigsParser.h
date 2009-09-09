@@ -15,6 +15,8 @@ public:
     static void parseHostopians(QWebFrame * frame);
     static void parseCategories(QWebFrame * frame);
     static void parseSubCategories(QWebFrame * frame);
+    static void parsePriorities(QWebFrame * frame);
+    static void parseStatuses(QWebFrame * frame);
     static void parseGlobalTechs(QWebFrame * frame);
     static void parseGroups(QWebFrame * frame);
     static QMap<QString, QString> parseSelect(QWebFrame * frame, const QString & node);

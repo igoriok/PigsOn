@@ -19,16 +19,11 @@ public:
     void setAccount(const Account & account);
     Account getAccount() const { return account; }
 
-public slots:
-    void check(bool = false);
-
-private slots:
-    void on_clicked();
-    void on_error();
-    void on_client_finished(QNetworkReply *);
-
 signals:
     void error(QString);
+
+public slots:
+    void check(bool = false);
 
 private:
     Account account;
@@ -58,6 +53,11 @@ private:
     void post(RequestType, QNetworkRequest, const QByteArray &);
     void submit();
     bool parseHTML(const QString &);
+
+private slots:
+    void on_clicked();
+    void on_error();
+    void on_client_finished(QNetworkReply *);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *);
